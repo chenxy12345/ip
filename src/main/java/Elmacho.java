@@ -16,7 +16,7 @@ public class Elmacho {
             if (Objects.equals(instruction, "list")) {
                 System.out.println("____________________________________________________________\n Your Tasks:");
                 for (int i = 0; i < n; i++) {
-                    System.out.println(i + 1 + ". [" + arrayA[i].getStatusIcon() + "] " + arrayA[i].getDescription());
+                    System.out.println(i + 1 + "." + arrayA[i].toString());
                 }
                 System.out.println("____________________________________________________________");
             }
@@ -48,6 +48,39 @@ public class Elmacho {
                 } else {
                     System.out.println("Please specify a task number to mark.");
                 }
+            }
+            else if (instruction.startsWith("todo")) {
+                String[] parts = instruction.split(" ", 2);
+                String task = parts[1];
+                ToDo todo = new ToDo(task);
+                arrayA[n] = todo;
+                n = n + 1;
+                System.out.println("____________________________________________________________");
+                System.out.println("Added task:\n  " + todo.toString() + "\nNow you have " + n + " tasks in the list.");
+                System.out.println("____________________________________________________________");
+            }
+            else if (instruction.startsWith("deadline")) {
+                String[] parts = instruction.split(" ", 2);
+                String[] details = parts[1].split("/by");
+                String task = details[0];
+                Deadline deadline = new Deadline(task, details[1]);
+                arrayA[n] = deadline;
+                n = n + 1;
+                System.out.println("____________________________________________________________");
+                System.out.println("Added task:\n  " + deadline.toString() + "\nNow you have " + n + " tasks in the list.");
+                System.out.println("____________________________________________________________");
+            }
+            else if (instruction.startsWith("event")) {
+                String[] parts = instruction.split(" ", 2);
+                String[] details = parts[1].split("/from");
+                String task = details[0];
+                String[] times = details[1].split("/to");
+                Event event = new Event(task, times[0], times[1]);
+                arrayA[n] = event;
+                n = n + 1;
+                System.out.println("____________________________________________________________");
+                System.out.println("Added task:\n  " + event.toString() + "\nNow you have " + n + " tasks in the list.");
+                System.out.println("____________________________________________________________");
             }
             else if (Objects.equals(instruction, "bye")) {
                 System.out.println("____________________________________________________________");
