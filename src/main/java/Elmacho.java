@@ -14,7 +14,7 @@ public class Elmacho {
         while (true) {
             String instruction = scanner.nextLine();
             if (Objects.equals(instruction, "list")) {
-                System.out.println("____________________________________________________________\n Your Tasks:");
+                System.out.println("____________________________________________________________\n");
                 for (int i = 0; i < n; i++) {
                     System.out.println(i + 1 + "." + arrayA[i].toString());
                 }
