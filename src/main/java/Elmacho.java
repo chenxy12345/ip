@@ -10,20 +10,44 @@ public class Elmacho {
         System.out.println("____________________________________________________________");
         Scanner scanner = new Scanner(System.in);
         int n = 0;
-        String[] arrayA = new String[100];
+        Task[] arrayA = new Task[100];
         while (true) {
             String instruction = scanner.nextLine();
             if (Objects.equals(instruction, "list")) {
-                System.out.println("____________________________________________________________");
+                System.out.println("____________________________________________________________\n Your Tasks:");
                 for (int i = 0; i < n; i++) {
-                    System.out.println(i + 1 + ". " + arrayA[i]);
+                    System.out.println(i + 1 + ". [" + arrayA[i].getStatusIcon() + "] " + arrayA[i].getDescription());
                 }
                 System.out.println("____________________________________________________________");
             }
-            else if (Objects.equals(instruction, "blah")) {
-                System.out.println("____________________________________________________________");
-                System.out.println("blahblahblahblahblah");
-                System.out.println("____________________________________________________________");
+            else if (instruction.startsWith("mark") || instruction.startsWith("unmark")) {
+                String[] parts = instruction.split(" ");
+                if (parts.length > 1) {
+                    try {
+                        int number = Integer.parseInt(parts[1]) - 1;
+                        if (number >= 0 && number < n) {
+                            if (instruction.startsWith("mark")) {
+                                arrayA[number].mark();
+                                System.out.println("____________________________________________________________");
+                                System.out.println("Finally. Marked this task as done:\n  ["
+                                        + arrayA[number].getStatusIcon() + "] " + arrayA[number].getDescription());
+                                System.out.println("____________________________________________________________");
+                            } else {
+                                arrayA[number].unmark();
+                                System.out.println("____________________________________________________________");
+                                System.out.println("Another task not done...:\n  ["
+                                        + arrayA[number].getStatusIcon() + "] " + arrayA[number].getDescription());
+                                System.out.println("____________________________________________________________");
+                            }
+                        } else {
+                            System.out.println("Invalid task number.");
+                        }
+                    } catch (NumberFormatException e) {
+                        System.out.println("Please enter a valid task number.");
+                    }
+                } else {
+                    System.out.println("Please specify a task number to mark.");
+                }
             }
             else if (Objects.equals(instruction, "bye")) {
                 System.out.println("____________________________________________________________");
@@ -32,7 +56,8 @@ public class Elmacho {
                 break;
             }
             else {
-                arrayA[n] = instruction;
+                Task task = new Task(instruction);
+                arrayA[n] = task;
                 n = n + 1;
                 System.out.println("____________________________________________________________");
                 System.out.println("added: " + instruction);
