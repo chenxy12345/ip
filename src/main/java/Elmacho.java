@@ -105,6 +105,31 @@ public class Elmacho {
                     System.out.println("Please specify a task number to mark.");
                 }
             }
+            else if (instruction.startsWith("delete")) {
+                String[] parts = instruction.split(" ");
+                if (parts.length > 1) {
+                    try {
+                        int number = Integer.parseInt(parts[1]) - 1;
+                        Task task = arrayA[number];
+                        if (number >= 0 && number < n) {
+                            for (int i = number; i < n + 1; i++) {
+                                arrayA[i] = arrayA[i + 1];
+                            }
+                            n = n - 1;
+                            System.out.println("____________________________________________________________");
+                            System.out.println("Deleted this task: \n  "
+                                    + task.toString() + "\nNow you have " + n + " tasks in the list.");
+                            System.out.println("____________________________________________________________");
+                        } else {
+                            System.out.println("Invalid task number.");
+                        }
+                    } catch (NumberFormatException e) {
+                        System.out.println("Please enter a valid task number.");
+                    }
+                } else {
+                    System.out.println("Please specify a task number to delete.");
+                }
+            }
             else if (instruction.startsWith("todo")) {
                 try {
                     ToDo todo = elmacho.makeToDo(instruction);
