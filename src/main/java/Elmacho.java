@@ -2,6 +2,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 import java.util.Scanner;
 
@@ -58,8 +60,10 @@ public class Elmacho {
         String[] details = parts[1].split("/by");
         String task = details[0].trim();
         String by = details.length > 1 ? details[1].trim() : "";
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
+        LocalDateTime dateTime = LocalDateTime.parse(by, formatter);
 
-        Deadline deadline = new Deadline(task, by);
+        Deadline deadline = new Deadline(task, dateTime);
         return deadline;
     }
 
@@ -77,7 +81,11 @@ public class Elmacho {
         if (times.length <=1 || details[1].trim().isEmpty()) {
             throw new ElmachoExceptions("HELLOOO! When does your event end??");
         }
-        Event event = new Event(task, times[0], times[1]);
+        System.out.println(times[0] + times[1]);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
+        LocalDateTime fromTime = LocalDateTime.parse(times[0].trim(), formatter);
+        LocalDateTime toTime = LocalDateTime.parse(times[1].trim(), formatter);
+        Event event = new Event(task, fromTime, toTime);
         return event;
     }
 

@@ -1,32 +1,37 @@
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 public class Event extends Task {
 
-    protected String from;
-    protected String to;
+    protected LocalDateTime from;
+    protected LocalDateTime to;
 
-    public Event(String description, String from, String to) throws ElmachoExceptions {
+    public Event(String description, LocalDateTime from, LocalDateTime to) throws ElmachoExceptions {
         super(description);
         if (description == null || description.trim().isEmpty()) {
             throw new ElmachoExceptions("HELLOOOO!!! Your event is empty??!??!");
         }
-        if (from == null || from.trim().isEmpty()) {
+        if (from == null) {
             throw new ElmachoExceptions("HELLOOO! When does your event start??");
         }
-        if (to == null || to.trim().isEmpty()) {
+        if (to == null) {
             throw new ElmachoExceptions("HELLOOO! When does your event end??");
         }
-        this.from = from.trim();
-        this.to = to.trim();
+        this.from = from;
+        this.to = to;
     }
 
     public String getInfo() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
         if (isDone) {
-            return "E|" + 1 + "|" + description + "/from" + from + "/to" + to;
+            return "E|" + 1 + "|" + description + "/from" + from.format(formatter) + "/to" + to.format(formatter);
         }
-        return "E|" + 0 + "|" + description + "/from" + from + "/to" + to;
+        return "E|" + 0 + "|" + description + "/from" + from.format(formatter) + "/to" + to.format(formatter);
     }
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (from: " + from + " to: " + to + ")";
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM d yyyy hh:mm a");
+        return "[E]" + super.toString() + " (from: " + from.format(formatter) + " to: " + to.format(formatter) + ")";
     }
 }
