@@ -18,6 +18,13 @@ public class Event extends Task {
         this.to = to.trim();
     }
 
+    public String getInfo() {
+        if (isDone) {
+            return "E|" + 1 + "|" + description + "/from" + from + "/to" + to;
+        }
+        return "E|" + 0 + "|" + description + "/from" + from + "/to" + to;
+    }
+
     @Override
     public String toString() {
         return "[E]" + super.toString() + " (from: " + from + " to: " + to + ")";

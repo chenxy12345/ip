@@ -13,6 +13,13 @@ public class Deadline extends Task {
         this.by = by;
     }
 
+    public String getInfo() {
+        if (isDone) {
+            return "D|" + 1 + "|" + description + "/by" + by;
+        }
+        return "D|" + 0 + "|" + description + "/by" + by;
+    }
+
     @Override
     public String toString() {
         return "[D]" + super.toString() + " (by: " + by + ")";

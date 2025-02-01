@@ -19,6 +19,10 @@ public class Task {
         this.isDone = true;
     }
 
+    public String getInfo() {
+        return "Task";
+    }
+
     public void unmark() {
         this.isDone = false;
     }
