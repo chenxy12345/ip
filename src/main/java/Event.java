@@ -6,27 +6,22 @@ public class Event extends Task {
     protected LocalDateTime from;
     protected LocalDateTime to;
 
-    public Event(String description, LocalDateTime from, LocalDateTime to) throws ElmachoExceptions {
-        super(description);
-        if (description == null || description.trim().isEmpty()) {
-            throw new ElmachoExceptions("HELLOOOO!!! Your event is empty??!??!");
-        }
-        if (from == null) {
-            throw new ElmachoExceptions("HELLOOO! When does your event start??");
-        }
-        if (to == null) {
-            throw new ElmachoExceptions("HELLOOO! When does your event end??");
-        }
-        this.from = from;
-        this.to = to;
+    public Event(String description, String from, String to, boolean isDone) {
+        super(description, isDone);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
+        LocalDateTime fromTime = LocalDateTime.parse(from, formatter);
+        LocalDateTime toTime = LocalDateTime.parse(to, formatter);
+        this.from = fromTime;
+        this.to = toTime;
     }
+
 
     public String getInfo() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
         if (isDone) {
-            return "E|" + 1 + "|" + description + "/from" + from.format(formatter) + "/to" + to.format(formatter);
+            return "E " + 1 + "/" + description + "/from" + from.format(formatter) + " to" + to.format(formatter);
         }
-        return "E|" + 0 + "|" + description + "/from" + from.format(formatter) + "/to" + to.format(formatter);
+        return "E " + 0 + "/" + description + "/from" + from.format(formatter) + " to" + to.format(formatter);
     }
 
     @Override
