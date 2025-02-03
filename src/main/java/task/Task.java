@@ -1,3 +1,5 @@
+package task;
+
 public class Task {
     protected String description;
     protected boolean isDone;
@@ -20,7 +22,7 @@ public class Task {
     }
 
     public String getInfo() {
-        return "Task";
+        return "task.Task";
     }
 
     public void unmark() {

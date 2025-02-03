@@ -1,3 +1,12 @@
+package storage;
+
+import command.Command;
+import parser.Parser;
+import task.Task;
+import task.Tasklist;
+import ui.Ui;
+import exceptions.ElmachoExceptions;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -44,10 +53,10 @@ public class Storage {
                 Command command = parser.parse(line);
                 command.execute(tasklist, this.ui);
             }
-        } catch (ElmachoExceptions e) {
-            System.out.println(e.getMessage());
         } catch (FileNotFoundException e) {
             System.out.println("Cannot find file");
+        } catch (ElmachoExceptions e) {
+            System.out.println(e.getMessage());
         }
         return tasklist;
     }
