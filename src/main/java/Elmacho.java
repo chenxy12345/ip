@@ -1,10 +1,13 @@
+import task.Tasklist;
+
 import command.Command;
 import command.ExitCommand;
+
 import exceptions.ElmachoExceptions;
+
+import ui.Ui;
 import parser.Parser;
 import storage.Storage;
-import task.Tasklist;
-import ui.Ui;
 
 import java.util.Scanner;
 
