@@ -1,5 +1,7 @@
 package task;
 
+import exceptions.ElmachoExceptions;
+
 public class Tasklist {
 
     private Task[] arrayA;
@@ -23,7 +25,7 @@ public class Tasklist {
         this.numberOfTasks++;
     }
 
-    public void delete(int n) {
+    public void delete(int n) throws ElmachoExceptions {
         if (n == 0) {
             this.arrayA[0] = null;
         }
@@ -33,7 +35,7 @@ public class Tasklist {
             }
             this.numberOfTasks--;
         } else {
-            System.out.println("Invalid task number.");
+            throw new ElmachoExceptions("Invalid task number.");
         }
     }
 

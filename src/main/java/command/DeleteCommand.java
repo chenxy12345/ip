@@ -6,6 +6,7 @@ import task.Task;
 import task.Tasklist;
 import task.ToDo;
 import ui.Ui;
+import exceptions.ElmachoExceptions;
 
 
 public class DeleteCommand extends Command {
@@ -20,7 +21,11 @@ public class DeleteCommand extends Command {
     public void execute(Tasklist tasklist, Ui ui) {
         Task[] tasks = tasklist.getTasks();
         Task task = tasks[n - 1];
-        tasklist.delete(n);
-        ui.printDeleteMessage(tasklist, task);
+        try {
+            tasklist.delete(n);
+            ui.printDeleteMessage(tasklist, task);
+        } catch (ElmachoExceptions e) {
+            System.out.println(e.getMessage());
+        }
     }
 }
