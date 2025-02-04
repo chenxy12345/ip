@@ -2,6 +2,9 @@ package task;
 
 import exceptions.ElmachoExceptions;
 
+/**
+ * This class contains methods for managing tasks in a Tasklist.
+ */
 public class Tasklist {
 
     private Task[] arrayA;
@@ -20,11 +23,20 @@ public class Tasklist {
         return arrayA;
     }
 
+    /**
+     * Adds a task to the Tasklist.
+     * @param task the Task object to be added
+     */
     public void add(Task task) {
         this.arrayA[this.numberOfTasks] = task;
         this.numberOfTasks++;
     }
 
+    /**
+     * Deletes a task from the Tasklist.
+     * @param n The index of the task to be deleted.
+     * @throws ElmachoExceptions if the index is not on the tasklist.
+     */
     public void delete(int n) throws ElmachoExceptions {
         if (n == 0) {
             this.arrayA[0] = null;
@@ -39,15 +51,36 @@ public class Tasklist {
         }
     }
 
+    /**
+     * Puts an "X" in the checkbox of the task.
+     * @param n The index of the task to be marked.
+     */
     public void mark(int n) {
         if (n >= 0 && n < this.numberOfTasks) {
             this.arrayA[n].mark();
         }
     }
 
+    /**
+     * Removes any "X" from the checkbox.
+     * @param n The index of the task to be unmarked.
+     */
     public void unmark(int n) {
         if (n >= 0 && n < this.numberOfTasks) {
             this.arrayA[n].unmark();
         }
+    }
+
+    public Tasklist find(String keyword) {
+        Tasklist filteredList = new Tasklist();
+        for (int i = 0; i < this.numberOfTasks; i++) {
+            String[] word = arrayA[i].getDescription().split(" ");
+            for (int j = 0; j < word.length; j++) {
+                if (word[j].equals(keyword)) {
+                    filteredList.add(arrayA[i]);
+                }
+            }
+        }
+        return filteredList;
     }
 }
