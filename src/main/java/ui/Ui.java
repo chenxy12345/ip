@@ -54,6 +54,20 @@ public class Ui {
         System.out.println("____________________________________________________________");
     }
 
+    public void printFilteredTasklist(Tasklist tasklist) {
+        Task[] arrayA = tasklist.getTasks();
+        if (tasklist.getNumberOfTasks() == 0) {
+            System.out.println("Nothing matched your keyword aw so sad");
+            System.out.println("____________________________________________________________");
+            return;
+        }
+        System.out.println("Here are the matching tasks in your list:");
+        for (int i = 0; i < tasklist.getNumberOfTasks(); i++) {
+            System.out.println(i + 1 + "." + arrayA[i].toString());
+        }
+        System.out.println("____________________________________________________________");
+    }
+
     public void printExit() {
         System.out.println("OkBye.");
         System.out.println("____________________________________________________________");
