@@ -1,25 +1,38 @@
 package parser;
 
+import task.Deadline;
+import task.Event;
+import task.ToDo;
+
 import command.Command;
 import command.AddCommand;
 import command.DeleteCommand;
 import command.ExitCommand;
+import command.FindCommand;
 import command.ListCommand;
 import command.MarkCommand;
 import command.StoreCommand;
 import command.UnmarkCommand;
+
 import exceptions.ElmachoExceptions;
-import task.Deadline;
-import task.Event;
-import task.ToDo;
-import task.Task;
 
-
+/**
+ * This class is responsible for interpreting user input and converting it into executable commands.
+ *
+ * <p>This class acts as an intermediary between the UI and the command execution logic,
+ *    ensuring that inputs are correctly formatted and valid before being processed.</p>
+ */
 public class Parser {
 
     public Parser() {
     }
 
+    /**
+     * Returns a Command to be executed afer parsing user input.
+     * @param instruction The raw user input as a String
+     * @return A Command object that represents the action to be performed.
+     * @throws ElmachoExceptions if the user input is incomplete or missing required details.
+     */
     public static Command parse(String instruction) throws ElmachoExceptions {
         String[] parts = instruction.split(" ", 2);
         String command = parts[0];
@@ -32,7 +45,6 @@ public class Parser {
                 System.out.println("Enter a valid task number.");
             }
         }
-
         if (command.equals("mark")) {
             try {
                 int number = Integer.parseInt(parts[1]);
@@ -49,6 +61,12 @@ public class Parser {
                 System.out.println("Enter a valid task number.");
             }
         }
+        if (command.equals("find")) {
+            String keyword = parts[1].trim();
+            return new FindCommand(keyword);
+        }
+
+        // Loading of tasks
         if (command.equals("T") || command.equals("D") || command.equals("E")) {
             String[] details = parts[1].split("/");
             boolean isDone = details[0].equals("1") ? true : false;

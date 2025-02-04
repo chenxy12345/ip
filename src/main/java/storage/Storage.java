@@ -1,11 +1,14 @@
 package storage;
 
-import command.Command;
-import parser.Parser;
 import task.Task;
 import task.Tasklist;
-import ui.Ui;
+
+import command.Command;
+
 import exceptions.ElmachoExceptions;
+
+import ui.Ui;
+import parser.Parser;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -13,16 +16,29 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
 
+/**
+ * Handles loading and updating of  stored task database.
+ * <p> This class loads the saved tasklist when the user starts the system a
+ *      and updates the stored database upon exit. </p>
+ */
 public class Storage {
 
     private String fileName;
     private Ui ui;
 
+    /**
+     * Creates a Storage for the tasks
+     * @param fileName Name of the file used to store tasks.
+     */
     public Storage(String fileName) {
         this.fileName = fileName;
         this.ui = new Ui();
     }
 
+    /**
+     * Updates the stored tasklist to the latest added task.
+     * @param tasklist The tasklist used to store tasks.
+     */
     public void updateList(Tasklist tasklist) {
         Task[] array = tasklist.getTasks();
         try (FileWriter writer = new FileWriter(this.fileName, false)) {
@@ -34,6 +50,10 @@ public class Storage {
         }
     }
 
+    /**
+     * Loads the data from the file when the chatbot starts up.
+     * @return The tasklist stored.
+     */
     public Tasklist load() {
         File file = new File(fileName);
         Parser parser = new Parser();
