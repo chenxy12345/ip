@@ -1,5 +1,6 @@
 package command;
 
+import exceptions.ElmachoException;
 import task.Task;
 import task.Tasklist;
 
@@ -27,7 +28,7 @@ public class AddCommand extends Command {
      * @param ui The UI used to print the add message.
      */
     @Override
-    public void execute(Tasklist tasklist, Tasklist archivedTasklist, Ui ui) {
+    public void execute(Tasklist tasklist, Tasklist archivedTasklist, Ui ui) throws ElmachoException {
         assert task != null : "Task should not be null.";
         tasklist.add(this.task);
         ui.printAddMessage(tasklist, this.task);

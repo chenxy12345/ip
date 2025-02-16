@@ -16,20 +16,19 @@ public class ArchiveCommand extends Command{
     }
 
     @Override
-    public void execute(Tasklist tasklist, Tasklist archivedTasklist, Ui ui) {
-        try {
-            ArrayList<Task> tasks = tasklist.getTasks();
-            if (index <= 0 || index > tasks.size()) {
-                throw new ElmachoException("Invalid task number. Change it.");
-            }
-            Task task = tasks.get(index - 1);
-            assert task != null : "Task should not be null.";
+    public void execute(Tasklist tasklist, Tasklist archivedTasklist, Ui ui) throws ElmachoException{
+        assert index >= 1: "Index must be a positive integer.";
 
-            archivedTasklist.add(task);
-            tasklist.delete(index);
-            ui.printArchivedTask(tasklist, archivedTasklist, task);
-        } catch (ElmachoException e) {
-            System.out.println(e.getMessage());
+        if (index <= 0 || index > tasklist.getNumberOfTasks()) {
+            throw new ElmachoException("Invalid task number. Change it.");
         }
+
+        ArrayList<Task> tasks = tasklist.getTasks();
+        Task task = tasks.get(index - 1);
+        assert task != null : "Task should not be null.";
+
+        archivedTasklist.add(task);
+        tasklist.delete(index);
+        ui.printArchivedTask(tasklist, archivedTasklist, task);
     }
 }

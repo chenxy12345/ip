@@ -1,12 +1,12 @@
 package ui;
 
-import task.Task;
-import task.Tasklist;
-
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+
+import task.Task;
+import task.Tasklist;
 
 public class Ui {
 

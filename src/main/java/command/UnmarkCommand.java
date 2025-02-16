@@ -1,5 +1,6 @@
 package command;
 
+import exceptions.ElmachoException;
 import task.Task;
 import task.Tasklist;
 
@@ -28,8 +29,13 @@ public class UnmarkCommand extends Command {
      * @param tasklist The tasklist that contains the task to be unmarked.
      * @param ui The UI used to print the unmarked message.
      */
-    public void execute(Tasklist tasklist, Tasklist archivedTasklist, Ui ui) {
+    public void execute(Tasklist tasklist, Tasklist archivedTasklist, Ui ui) throws ElmachoException {
         assert index >= 1 : "Index must be a positive integer.";
+
+        if (index <= 0 || index > tasklist.getNumberOfTasks()) {
+            throw new ElmachoException("Invalid task number. Change it.");
+        }
+
         tasklist.unmark(index - 1);
         ArrayList<Task> tasks = tasklist.getTasks();
         Task task = tasks.get(index - 1);

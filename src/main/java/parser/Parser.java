@@ -1,6 +1,19 @@
 package parser;
 
-import command.*;
+import command.AddCommand;
+import command.ArchiveCommand;
+import command.ArchiveListCommand;
+import command.Command;
+import command.DeleteCommand;
+import command.ExitCommand;
+import command.FindCommand;
+import command.ListCommand;
+import command.MarkCommand;
+import command.MotivationCommand;
+import command.StoreCommand;
+import command.UnarchiveCommand;
+import command.UnmarkCommand;
+
 import task.Deadline;
 import task.Event;
 import task.ToDo;
@@ -153,11 +166,11 @@ public class Parser {
     public static int checkIndex(String[] parts) throws ElmachoException {
         try {
             if (parts.length <= 1 || parts[1].trim().isEmpty()) {
-                throw new ElmachoException("Task index not specified. Which task do you mean?");
+                throw new ElmachoException("Task number not specified. Which task do you mean?");
             }
             int number = Integer.parseInt(parts[1]);
             if (number <= 0) {
-                throw new ElmachoException("Invalid index given.");
+                throw new ElmachoException("Invalid task number given.");
             }
             return number;
         } catch (NumberFormatException e) {
@@ -176,7 +189,7 @@ public class Parser {
             }
             int number = Integer.parseInt(parts[1]);
             if (number <= 0) {
-                throw new ElmachoException("Invalid index given.");
+                throw new ElmachoException("Invalid task number given.");
             }
             return new ArchiveCommand(number);
         } catch (NumberFormatException e) {

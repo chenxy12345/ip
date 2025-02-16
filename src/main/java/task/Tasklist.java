@@ -1,7 +1,8 @@
 package task;
 
-import exceptions.ElmachoException;
 import java.util.ArrayList;
+
+import exceptions.ElmachoException;
 
 /**
  * This class contains methods for managing tasks in a Tasklist.
