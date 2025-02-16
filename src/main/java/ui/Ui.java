@@ -7,77 +7,81 @@ import java.util.ArrayList;
 
 public class Ui {
 
-    private final String NAME = "elmacho.Elmacho";
+    private final String NAME = "Elmacho";
+
+    private String latestResponse;
 
     public Ui() {
     }
 
-    public void start() {
-        System.out.println("____________________________________________________________");
-        System.out.println("What. I'm " + NAME);
-        System.out.println("What you want?");
-        System.out.println("____________________________________________________________");
+    public String getLatestResponse() {
+        return latestResponse;
+    }
+
+    public String userGuide() {
+        String userGuide = "USER GUIDE TO ELMACHO:\n\nTo add a ToDo:\n   'todo [task name]'"
+                + "\nTo add a Deadline:\n   'deadline [task name] /by yyyy-MM-dd HHmm'"
+                + "\nTo add an Event:\n   'event [task name] /from yyyy-MM-dd HHmm /to yyyy-MM-dd HHmm'";
+        String userCommands = "\n\nLIST OF USER COMMANDS:\n\n1.list\n2.delete\n3.mark\n4.unmark\n5.find";
+        return userGuide + userCommands;
+    }
+
+    public String start() {
+        return "What. I'm " + NAME + "\nWhat you want?";
     }
 
     public void help() {
-        System.out.println("Speak a language I can understand.");
-        System.out.println("____________________________________________________________");
+        latestResponse = "Speak a language I can understand.";
     }
 
     public void printAddMessage(Tasklist tasklist, Task task) {
-        System.out.println("Added task:\n  " + task + "\nNow you have " + tasklist.getNumberOfTasks() + " tasks in the list.");
-        System.out.println("____________________________________________________________");
+        latestResponse = "Added task:\n  " + task + "\nNow you have " + tasklist.getNumberOfTasks()
+                + " tasks in the list";
     }
 
     public void printDeleteMessage(Tasklist tasklist, Task task) {
-        System.out.println("Deleted task:\n  " + task + "\nNow you have " + tasklist.getNumberOfTasks() + " tasks in the list.");
-        System.out.println("____________________________________________________________");
+        latestResponse = "Deleted task:\n  " + task + "\nNow you have " + tasklist.getNumberOfTasks()
+                + " tasks in the list";
     }
 
     public void printTaskList(Tasklist tasklist) {
         ArrayList<Task> tasks = tasklist.getTasks();
-        int i = 1;
-        for (Task task : tasks) {
-            System.out.println(i + "." + task.toString());
-            i++;
-        }
         if (tasks.isEmpty()) {
-            System.out.println("List is empty");
+            latestResponse = "List is empty";
+        } else {
+            int i = 1;
+            String result = "";
+            for (Task task : tasks) {
+                result = result + i + ". " + task + "\n";
+                i++;
+            }
+            latestResponse = result;
         }
-        System.out.println("____________________________________________________________");
     }
 
     public void printMarked(Task task) {
-        System.out.println("Finally. Marked this task as done:\n  ["
-                + task.getStatusIcon() + "] " + task.getDescription());
-        System.out.println("____________________________________________________________");
+        latestResponse = "Finally. Marked this task as done:\n  ["
+                + task.getStatusIcon() + "] " + task.getDescription();
     }
 
     public void printUnmarked(Task task) {
-        System.out.println("Another task not done...:\n  ["
-                + task.getStatusIcon() + "] " + task.getDescription());
-        System.out.println("____________________________________________________________");
+        latestResponse = "Another task not done...:\n  ["
+                + task.getStatusIcon() + "] " + task.getDescription();
     }
 
     public void printFilteredTasklist(Tasklist tasklist) {
         ArrayList<Task> tasks = tasklist.getTasks();
         if (tasks.isEmpty()) {
-            System.out.println("Nothing matched your keyword aw so sad");
-            System.out.println("____________________________________________________________");
-            return;
+            latestResponse = "Nothing matched your keyword aw so sad";
+        } else {
+            int i = 1;
+            String result = "";
+            for (Task task : tasks) {
+                result = result + i + ". " + task + "\n";
+                i++;
+            }
+            latestResponse = result;
         }
-        System.out.println("Here are the matching tasks in your list:");
-        int i = 1;
-        for (Task task : tasks) {
-            System.out.println(i + "." + task.toString());
-            i++;
-        }
-        System.out.println("____________________________________________________________");
-    }
-
-    public void printExit() {
-        System.out.println("OkBye.");
-        System.out.println("____________________________________________________________");
     }
 
 }

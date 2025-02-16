@@ -1,5 +1,6 @@
 package command;
 
+import javafx.application.Platform;
 import task.Tasklist;
 
 import ui.Ui;
@@ -13,6 +14,6 @@ public class ExitCommand extends Command {
 
     @Override
     public void execute(Tasklist tasklist, Ui ui) {
-        ui.printExit();
+        Platform.exit();
     }
 }

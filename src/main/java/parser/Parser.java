@@ -100,6 +100,7 @@ public class Parser {
                 String[] deadlineDetails = description[1].split("/by ", 2);  // Split on "/by " with a limit of 2
 
                 if (deadlineDetails.length < 2) {
+                    System.out.println(description);
                     throw new ElmachoException("HELLOOO! When is the deadline??");
                 }
                 String task = deadlineDetails[0].trim();
@@ -138,13 +139,13 @@ public class Parser {
                 return new StoreCommand(new ToDo(storeDescription, isDone));
             }
             case "D" -> {
-                String[] storeDetails = details[2].split("by");
+                String[] storeDetails = details[2].split("By");
                 String dueDate = storeDetails[1].trim();
                 return new StoreCommand(new Deadline(storeDescription, dueDate, isDone));
             }
             case "E" -> {
-                String[] storeDetails = details[2].split("from");
-                String[] storeDetails2 = storeDetails[1].split("to");
+                String[] storeDetails = details[2].split("From");
+                String[] storeDetails2 = storeDetails[1].split("To");
                 String fromDate = storeDetails2[0].trim();
                 String toDate = storeDetails2[1].trim();
                 return new StoreCommand(new Event(storeDescription, fromDate, toDate, isDone));

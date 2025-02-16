@@ -21,17 +21,17 @@ public class Event extends Task {
     public String getInfo() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
         if (isDone) {
-            return "E " + 1 + "/" + description + "/from" + from.format(formatter)
-                    + " to" + to.format(formatter);
+            return "E " + 1 + "/" + description + "/From" + from.format(formatter)
+                    + " To" + to.format(formatter);
         }
-        return "E " + 0 + "/" + description + "/from" + from.format(formatter)
-                + " to" + to.format(formatter);
+        return "E " + 0 + "/" + description + "/From" + from.format(formatter)
+                + " To" + to.format(formatter);
     }
 
     @Override
     public String toString() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM d yyyy hh:mm a");
-        return "[E]" + super.toString() + " (from: " + from.format(formatter)
-                + " to: " + to.format(formatter) + ")";
+        return "[E]" + super.toString() + " \n    (From: " + from.format(formatter)
+                + "\n     To: " + to.format(formatter) + ")";
     }
 }

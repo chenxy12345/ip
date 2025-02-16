@@ -22,6 +22,6 @@ public class StorageTest {
         String expectedTask2 = "D 0/ma1521/by2020-01-01 1900";
         ArrayList<Task> resultTask = (resultTasklist.getTasks());
         assertEquals(expectedTask1, resultTask.get(0).getInfo());
-        assertEquals(expectedTask2, resultTask.get(0).getInfo());
+        assertEquals(expectedTask2, resultTask.get(1).getInfo());
     }
 }

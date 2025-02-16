@@ -17,14 +17,14 @@ public class Deadline extends Task {
     public String getInfo() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
         if (isDone) {
-            return "D " + 1 + "/" + description + "/by" + by.format(formatter);
+            return "D " + 1 + "/" + description + "/By" + by.format(formatter);
         }
-        return "D " + 0 + "/" + description + "/by" + by.format(formatter);
+        return "D " + 0 + "/" + description + "/By" + by.format(formatter);
     }
 
     @Override
     public String toString() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM d yyyy hh:mm a");
-        return "[D]" + super.toString() + " (by: " + by.format(formatter) + ")";
+        return "[D]" + super.toString() + " (By: " + by.format(formatter) + ")";
     }
 }

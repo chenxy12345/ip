@@ -1,5 +1,6 @@
 package elmacho;
 
+import javafx.application.Platform;
 import task.Tasklist;
 
 import command.Command;
@@ -11,18 +12,20 @@ import ui.Ui;
 import parser.Parser;
 import storage.Storage;
 
-import java.util.Scanner;
 
 public class Elmacho {
 
     private final Storage storage;
     private final Ui ui;
     private Tasklist tasklist;
+    private Parser parser;
 
     public Elmacho() {
         this.ui = new Ui();
-        this.tasklist = new Tasklist();
-        this.storage = new Storage("elmacho.Elmacho.txt");
+        this.storage = new Storage("Elmacho.txt");
+        this.tasklist = storage.load();
+        this.parser = new Parser();
+        ui.start();
     }
 
     public Tasklist getTasklist() {
@@ -34,29 +37,28 @@ public class Elmacho {
     }
 
 
-    public static void main(String[] args) {
-        Elmacho elmacho = new Elmacho();
-        elmacho.ui.start();
-        elmacho.tasklist = elmacho.storage.load();
-        Scanner scanner = new Scanner(System.in);
-        Parser parser = new Parser();
+    public String getResponse(String input) {
+        try {
+            Command command = parser.parse(input);
 
-        while (true) {
-            String line = scanner.nextLine();
-            Command command = null;
-            try {
-                command = parser.parse(line);
-                command.execute(elmacho.tasklist, elmacho.ui);
-                elmacho.storage.updateList(elmacho.tasklist);
-            } catch (ElmachoException e) {
-                System.out.println(e.getMessage());
-            }
+            // Execute the command and capture the response
+            command.execute(tasklist, ui);
+            storage.updateList(tasklist);
 
-            if (command instanceof ExitCommand) {
-                break;
-            }
+            // Return the latest UI response
+            return ui.getLatestResponse();
+
+        } catch (ElmachoException e) {
+            return e.getMessage();
         }
-        scanner.close();
+    }
+
+    public String getWelcomeMessage() {
+        return ui.start();
+    }
+
+    public String getUserGuide() {
+        return ui.userGuide();
     }
 }
 
