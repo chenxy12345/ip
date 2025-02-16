@@ -14,9 +14,11 @@ public class Ui {
     private String latestResponse;
 
     public Ui() {
+        this.latestResponse = "";
     }
 
     public String getLatestResponse() {
+        assert latestResponse != null : "Latest response should not be null";
         return latestResponse;
     }
 
@@ -37,11 +39,13 @@ public class Ui {
     }
 
     public void printAddMessage(Tasklist tasklist, Task task) {
+        assert task != null : "Task should not be null.";
         latestResponse = "Added task:\n  " + task + "\nNow you have " + tasklist.getNumberOfTasks()
                 + " tasks in the list";
     }
 
     public void printDeleteMessage(Tasklist tasklist, Task task) {
+        assert task != null : "Task should not be null.";
         latestResponse = "Deleted task:\n  " + task + "\nNow you have " + tasklist.getNumberOfTasks()
                 + " tasks in the list";
     }
@@ -55,11 +59,13 @@ public class Ui {
     }
 
     public void printMarked(Task task) {
+        assert task != null : "Task should not be null.";
         latestResponse = "Finally. Marked this task as done:\n  ["
                 + task.getStatusIcon() + "] " + task.getDescription();
     }
 
     public void printUnmarked(Task task) {
+        assert task != null : "Task should not be null.";
         latestResponse = "Another task not done...:\n  ["
                 + task.getStatusIcon() + "] " + task.getDescription();
     }

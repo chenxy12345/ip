@@ -42,6 +42,7 @@ public class Storage {
      */
     public void updateList(Tasklist tasklist) {
         ArrayList<Task> tasks = tasklist.getTasks();
+        assert fileName != null : "File must not be null.";
         try (FileWriter writer = new FileWriter(this.fileName, false)) {
             for (Task task : tasks) {
                 writer.write(task.getInfo() + "\n");
@@ -72,6 +73,8 @@ public class Storage {
             while (scanner.hasNextLine()) {
                 String line = scanner.nextLine();
                 Command command = parser.parse(line);
+
+                assert command != null : "Command must not be null.";
                 command.execute(tasklist, this.ui);
             }
         } catch (FileNotFoundException e) {
