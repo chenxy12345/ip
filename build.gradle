@@ -2,6 +2,7 @@ plugins {
     id 'java'
     id 'application'
     id 'com.github.johnrengelman.shadow' version '7.1.2'
+    id 'checkstyle'
 }
 
 repositories {
@@ -27,8 +28,13 @@ test {
     }
 }
 
+checkstyle {
+    toolVersion = '10.0'
+    configFile = file('/Users/chenxy/Documents/ip/config/checkstyle/checkstyle.xml')
+}
+
 application {
-    mainClassName = "Elmacho"
+    mainClassName = "elmacho.Launcher"
 }
 
 shadowJar {
