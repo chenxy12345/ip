@@ -62,18 +62,4 @@ public class Tasklist {
             tasks.get(n).unmark();
         }
     }
-
-    public Tasklist find(String keyword) {
-        Tasklist filteredList = new Tasklist();
-        for (Task task : tasks) {
-            String[] words = task.getDescription().split(" ");
-            for (String word : words) {
-                if (word.equals(keyword)) {
-                    filteredList.add(task);
-                    break;
-                }
-            }
-        }
-        return filteredList;
-    }
 }
