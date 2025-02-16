@@ -3,15 +3,18 @@ package ui;
 import task.Task;
 import task.Tasklist;
 
+import java.util.ArrayList;
+
 public class Ui {
+
+    private final String NAME = "elmacho.Elmacho";
 
     public Ui() {
     }
 
     public void start() {
-        String name = "Elmacho";
         System.out.println("____________________________________________________________");
-        System.out.println("What. I'm " + name);
+        System.out.println("What. I'm " + NAME);
         System.out.println("What you want?");
         System.out.println("____________________________________________________________");
     }
@@ -32,11 +35,13 @@ public class Ui {
     }
 
     public void printTaskList(Tasklist tasklist) {
-        Task[] arrayA = tasklist.getTasks();
-        for (int i = 0; i < tasklist.getNumberOfTasks(); i++) {
-            System.out.println(i + 1 + "." + arrayA[i].toString());
+        ArrayList<Task> tasks = tasklist.getTasks();
+        int i = 1;
+        for (Task task : tasks) {
+            System.out.println(i + "." + task.toString());
+            i++;
         }
-        if (tasklist.getNumberOfTasks() == 0) {
+        if (tasks.isEmpty()) {
             System.out.println("List is empty");
         }
         System.out.println("____________________________________________________________");
@@ -55,15 +60,17 @@ public class Ui {
     }
 
     public void printFilteredTasklist(Tasklist tasklist) {
-        Task[] arrayA = tasklist.getTasks();
-        if (tasklist.getNumberOfTasks() == 0) {
+        ArrayList<Task> tasks = tasklist.getTasks();
+        if (tasks.isEmpty()) {
             System.out.println("Nothing matched your keyword aw so sad");
             System.out.println("____________________________________________________________");
             return;
         }
         System.out.println("Here are the matching tasks in your list:");
-        for (int i = 0; i < tasklist.getNumberOfTasks(); i++) {
-            System.out.println(i + 1 + "." + arrayA[i].toString());
+        int i = 1;
+        for (Task task : tasks) {
+            System.out.println(i + "." + task.toString());
+            i++;
         }
         System.out.println("____________________________________________________________");
     }

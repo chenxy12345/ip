@@ -5,19 +5,21 @@ import task.Tasklist;
 
 import ui.Ui;
 
+import java.util.ArrayList;
+
 /**
  * Represents a command to mark a task as uncompleted and print the unmarked confirmation message to the UI.
  */
 public class UnmarkCommand extends Command {
 
-    private int n;
+    private final int index;
 
     /**
      * Constructs an UnmarkCommand with the index of the task to be unmarked.
-     * @param n The index of the task in the tasklist to be unmarked.
+     * @param index The index of the task in the tasklist to be unmarked.
      */
-    public UnmarkCommand(int n) {
-        this.n = n;
+    public UnmarkCommand(int index) {
+        this.index = index;
     }
 
     /**
@@ -27,9 +29,9 @@ public class UnmarkCommand extends Command {
      * @param ui The UI used to print the unmarked message.
      */
     public void execute(Tasklist tasklist, Ui ui) {
-        tasklist.unmark(n - 1);
-        Task[] tasks = tasklist.getTasks();
-        Task task = tasks[n - 1];
+        tasklist.unmark(index - 1);
+        ArrayList<Task> tasks = tasklist.getTasks();
+        Task task = tasks.get(index - 1);
         ui.printUnmarked(task);
     }
 }

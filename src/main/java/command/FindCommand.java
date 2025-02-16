@@ -1,13 +1,12 @@
 package command;
 
-import task.Task;
 import task.Tasklist;
 
 import ui.Ui;
 
 public class FindCommand extends Command {
 
-    private String keyword;
+    private final String keyword;
 
     public FindCommand(String keyword) {
         this.keyword = keyword;

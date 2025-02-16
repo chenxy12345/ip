@@ -5,22 +5,23 @@ import task.Tasklist;
 
 import ui.Ui;
 
-import exceptions.ElmachoExceptions;
+import java.util.ArrayList;
+import exceptions.ElmachoException;
 
 /**
  * Represents a command to delete a task from the tasklist and print the confirmation message to the UI.
  */
 public class DeleteCommand extends Command {
 
-    private int n;
+    private int index;
 
     /**
      * Constructs a DeleteCommand with the index of the task to be deleted.
-     * @param n The index of the task in tasklist to be deleted.
+     * @param index The index of the task in tasklist to be deleted.
      *          Index starts from 1.
      */
-    public DeleteCommand(int n) {
-        this.n = n;
+    public DeleteCommand(int index) {
+        this.index = index;
     }
 
     /**
@@ -28,16 +29,20 @@ public class DeleteCommand extends Command {
      *                     a message on the UI indicating the task has been deleted.
      * @param tasklist The tasklist in which the task is being deleted from.
      * @param ui The UI used to print the delete message.
-     * @throws ElmachoExceptions if the task at the specified index does not exist.
+     * @throws ElmachoException if the task at the specified index does not exist.
      */
     @Override
     public void execute(Tasklist tasklist, Ui ui) {
-        Task[] tasks = tasklist.getTasks();
-        Task task = tasks[n - 1];
         try {
-            tasklist.delete(n);
+            ArrayList<Task> tasks = tasklist.getTasks();
+            // Check if index is valid before getting the task
+            if (index <= 0 || index > tasks.size()) {
+                throw new ElmachoException("Invalid task number.");
+            }
+            Task task = tasks.get(index - 1);
+            tasklist.delete(index);
             ui.printDeleteMessage(tasklist, task);
-        } catch (ElmachoExceptions e) {
+        } catch (ElmachoException e) {
             System.out.println(e.getMessage());
         }
     }

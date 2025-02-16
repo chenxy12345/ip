@@ -1,9 +1,11 @@
+package elmacho;
+
 import task.Tasklist;
 
 import command.Command;
 import command.ExitCommand;
 
-import exceptions.ElmachoExceptions;
+import exceptions.ElmachoException;
 
 import ui.Ui;
 import parser.Parser;
@@ -13,14 +15,14 @@ import java.util.Scanner;
 
 public class Elmacho {
 
-    private Storage storage;
-    private Ui ui;
+    private final Storage storage;
+    private final Ui ui;
     private Tasklist tasklist;
 
     public Elmacho() {
         this.ui = new Ui();
         this.tasklist = new Tasklist();
-        this.storage = new Storage("Elmacho.txt");
+        this.storage = new Storage("elmacho.Elmacho.txt");
     }
 
     public Tasklist getTasklist() {
@@ -46,7 +48,7 @@ public class Elmacho {
                 command = parser.parse(line);
                 command.execute(elmacho.tasklist, elmacho.ui);
                 elmacho.storage.updateList(elmacho.tasklist);
-            } catch (ElmachoExceptions e) {
+            } catch (ElmachoException e) {
                 System.out.println(e.getMessage());
             }
 

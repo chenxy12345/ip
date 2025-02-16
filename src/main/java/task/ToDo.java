@@ -10,8 +10,9 @@ public class ToDo extends Task {
     public String getInfo() {
         if (super.isDone) {
             return "T " + 1 + "/" + description;
+        } else {
+            return "T " + 0 + "/" + description;
         }
-        return "T " + 0 + "/" + description;
     }
 
     @Override

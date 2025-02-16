@@ -14,7 +14,7 @@ import command.MarkCommand;
 import command.StoreCommand;
 import command.UnmarkCommand;
 
-import exceptions.ElmachoExceptions;
+import exceptions.ElmachoException;
 
 /**
  * This class is responsible for interpreting user input and converting it into executable commands.
@@ -31,9 +31,9 @@ public class Parser {
      * Returns a Command to be executed afer parsing user input.
      * @param instruction The raw user input as a String
      * @return A Command object that represents the action to be performed.
-     * @throws ElmachoExceptions if the user input is incomplete or missing required details.
+     * @throws ElmachoException if the user input is incomplete or missing required details.
      */
-    public static Command parse(String instruction) throws ElmachoExceptions {
+    public static Command parse(String instruction) throws ElmachoException {
         String[] parts = instruction.split(" ", 2);
         String command = parts[0];
 
@@ -66,27 +66,9 @@ public class Parser {
             return new FindCommand(keyword);
         }
 
-        // Loading of tasks
+        // Loading of tasks from storage
         if (command.equals("T") || command.equals("D") || command.equals("E")) {
-            String[] details = parts[1].split("/");
-            boolean isDone = details[0].equals("1") ? true : false;
-            String storeDescription = details[1];
-
-            if (command.equals("T")) {
-                return new StoreCommand(new ToDo(storeDescription, isDone));
-            }
-            if (command.equals("D")) {
-                String[] storeDetails = details[2].split("by");
-                String dueDate = storeDetails[1].trim();
-                return new StoreCommand(new Deadline(storeDescription, dueDate, isDone));
-            }
-            if (command.equals("E")) {
-                String[] storeDetails = details[2].split("from");
-                String[] storeDetails2 = storeDetails[1].split("to");
-                String fromDate = storeDetails2[0].trim();
-                String toDate = storeDetails2[1].trim();
-                return new StoreCommand(new Event(storeDescription, fromDate, toDate, isDone));
-            }
+            return reloadTask(command, parts);
         }
 
         if (command.equals("bye")) {
@@ -99,39 +81,73 @@ public class Parser {
 
         // Adding of tasks
         if (command.equals("todo") || command.equals("deadline") || command.equals("event")) {
-            if (parts.length <= 1 || parts[1].trim().isEmpty()) {
-                throw new ElmachoExceptions("HELLOOOO!!! Your task is empty??!??!");
+            if (parts.length == 1 || parts[1].trim().isEmpty()) {
+                throw new ElmachoException("HELLOOOO!!! Your task is empty??!??!");
             } else {
-                if (command.equals("todo")) {
-                    String task = parts[1].trim();
-                    return new AddCommand(new ToDo(task, false));
-                }
-                if (command.equals("deadline")) {
-                    String[] deadlineDetails = parts[1].split("/by ", 2);  // Split on "/by " with a limit of 2
-                    if (deadlineDetails.length < 2) {
-                        throw new ElmachoExceptions("HELLOOO! When is the deadline??");
-                    }
-                    String task = deadlineDetails[0].trim();
-                    String dueDate = deadlineDetails[1].trim();  // This will be "2019-01-01 1800"
-                    return new AddCommand(new Deadline(task, dueDate, false));
-                }
-                if (command.equals("event")) {
-                    String[] eventDetails = parts[1].split("/from ", 2);
-                    if (eventDetails.length < 2) {
-                        throw new ElmachoExceptions("HELLOOO! When does your event start??");
-                    }
-                    String task = eventDetails[0].trim();
+                return makeNewTask(command, parts);
+            }
+        }
+        return new Command();
+    }
 
-                    String[] timeDetails = eventDetails[1].split("/to ", 2);
-                    if (timeDetails.length < 2) {
-                        throw new ElmachoExceptions("HELLO. When does your event end?");
-                    }
+    public static Command makeNewTask(String command, String[] description) throws ElmachoException {
+        switch (command) {
+            case "todo" -> {
+                String task = description[1].trim();
+                return new AddCommand(new ToDo(task, false));
+            }
+            case "deadline" -> {
+                String[] deadlineDetails = description[1].split("/by ", 2);  // Split on "/by " with a limit of 2
 
-                    String from = timeDetails[0].trim();
-                    String to = timeDetails[1].trim();
-
-                    return new AddCommand(new Event(task, from, to, false));
+                if (deadlineDetails.length < 2) {
+                    throw new ElmachoException("HELLOOO! When is the deadline??");
                 }
+                String task = deadlineDetails[0].trim();
+                String dueDate = deadlineDetails[1].trim();  // This will be "2019-01-01 1800"
+
+                return new AddCommand(new Deadline(task, dueDate, false));
+            }
+            case "event" -> {
+                String[] eventDetails = description[1].split("/from ", 2);
+                if (eventDetails.length < 2) {
+                    throw new ElmachoException("HELLOOO! When does your event start??");
+                }
+                String task = eventDetails[0].trim();
+
+                String[] timeDetails = eventDetails[1].split("/to ", 2);
+                if (timeDetails.length < 2) {
+                    throw new ElmachoException("HELLO. When does your event end?");
+                }
+
+                String from = timeDetails[0].trim();
+                String to = timeDetails[1].trim();
+
+                return new AddCommand(new Event(task, from, to, false));
+            }
+        }
+        return new Command();
+    }
+
+    public static Command reloadTask(String command, String[] description) {
+        String[] details = description[1].split("/");
+        boolean isDone = details[0].equals("1");
+        String storeDescription = details[1];
+
+        switch (command) {
+            case "T" -> {
+                return new StoreCommand(new ToDo(storeDescription, isDone));
+            }
+            case "D" -> {
+                String[] storeDetails = details[2].split("by");
+                String dueDate = storeDetails[1].trim();
+                return new StoreCommand(new Deadline(storeDescription, dueDate, isDone));
+            }
+            case "E" -> {
+                String[] storeDetails = details[2].split("from");
+                String[] storeDetails2 = storeDetails[1].split("to");
+                String fromDate = storeDetails2[0].trim();
+                String toDate = storeDetails2[1].trim();
+                return new StoreCommand(new Event(storeDescription, fromDate, toDate, isDone));
             }
         }
         return new Command();

@@ -1,26 +1,25 @@
 package task;
 
-import exceptions.ElmachoExceptions;
+import exceptions.ElmachoException;
+import java.util.ArrayList;
 
 /**
  * This class contains methods for managing tasks in a Tasklist.
  */
 public class Tasklist {
 
-    private Task[] arrayA;
-    private int numberOfTasks;
+    private final ArrayList<Task> tasks;
 
     public Tasklist() {
-        this.arrayA = new Task[100];
-        this.numberOfTasks = 0;
+        this.tasks = new ArrayList<>();
+    }
+
+    public ArrayList<Task> getTasks() {
+        return tasks;
     }
 
     public int getNumberOfTasks() {
-        return numberOfTasks;
-    }
-
-    public Task[] getTasks() {
-        return arrayA;
+        return tasks.size();
     }
 
     /**
@@ -28,26 +27,19 @@ public class Tasklist {
      * @param task the Task object to be added
      */
     public void add(Task task) {
-        this.arrayA[this.numberOfTasks] = task;
-        this.numberOfTasks++;
+        tasks.add(task);
     }
 
     /**
      * Deletes a task from the Tasklist.
      * @param n The index of the task to be deleted.
-     * @throws ElmachoExceptions if the index is not on the tasklist.
+     * @throws ElmachoException if the index is not on the tasklist.
      */
-    public void delete(int n) throws ElmachoExceptions {
-        if (n == 0) {
-            this.arrayA[0] = null;
-        }
-        if (n > 0 && n <= this.numberOfTasks) {
-            for (int i = n - 1; i < this.numberOfTasks; i++) {
-                this.arrayA[i] = this.arrayA[i + 1];
-            }
-            this.numberOfTasks--;
+    public void delete(int n) throws ElmachoException {
+        if (n > 0 && n <= tasks.size()) {
+            tasks.remove(n - 1);
         } else {
-            throw new ElmachoExceptions("Invalid task number.");
+            throw new ElmachoException("Invalid task number.");
         }
     }
 
@@ -56,8 +48,8 @@ public class Tasklist {
      * @param n The index of the task to be marked.
      */
     public void mark(int n) {
-        if (n >= 0 && n < this.numberOfTasks) {
-            this.arrayA[n].mark();
+        if (n >= 0 && n < tasks.size()) {
+            tasks.get(n).mark();
         }
     }
 
@@ -66,18 +58,19 @@ public class Tasklist {
      * @param n The index of the task to be unmarked.
      */
     public void unmark(int n) {
-        if (n >= 0 && n < this.numberOfTasks) {
-            this.arrayA[n].unmark();
+        if (n >= 0 && n < tasks.size()) {
+            tasks.get(n).unmark();
         }
     }
 
     public Tasklist find(String keyword) {
         Tasklist filteredList = new Tasklist();
-        for (int i = 0; i < this.numberOfTasks; i++) {
-            String[] word = arrayA[i].getDescription().split(" ");
-            for (int j = 0; j < word.length; j++) {
-                if (word[j].equals(keyword)) {
-                    filteredList.add(arrayA[i]);
+        for (Task task : tasks) {
+            String[] words = task.getDescription().split(" ");
+            for (String word : words) {
+                if (word.equals(keyword)) {
+                    filteredList.add(task);
+                    break;
                 }
             }
         }

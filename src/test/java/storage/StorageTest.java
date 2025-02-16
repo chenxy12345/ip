@@ -5,6 +5,7 @@ import task.Task;
 import task.Tasklist;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -19,8 +20,8 @@ public class StorageTest {
         Tasklist resultTasklist = storage.load();
         String expectedTask1 = "T 1/ma1522";
         String expectedTask2 = "D 0/ma1521/by2020-01-01 1900";
-        Task[] resultTask = (resultTasklist.getTasks());
-        assertEquals(expectedTask1, resultTask[0].getInfo());
-        assertEquals(expectedTask2, resultTask[1].getInfo());
+        ArrayList<Task> resultTask = (resultTasklist.getTasks());
+        assertEquals(expectedTask1, resultTask.get(0).getInfo());
+        assertEquals(expectedTask2, resultTask.get(0).getInfo());
     }
 }

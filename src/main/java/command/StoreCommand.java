@@ -10,7 +10,7 @@ import ui.Ui;
  */
 public class StoreCommand extends Command {
 
-    private Task task;
+    private final Task task;
 
     /**
      * Constructs a StoreCommand with the task object to be stored.

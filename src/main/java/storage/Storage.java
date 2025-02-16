@@ -5,7 +5,7 @@ import task.Tasklist;
 
 import command.Command;
 
-import exceptions.ElmachoExceptions;
+import exceptions.ElmachoException;
 
 import ui.Ui;
 import parser.Parser;
@@ -14,6 +14,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
@@ -23,8 +24,8 @@ import java.util.Scanner;
  */
 public class Storage {
 
-    private String fileName;
-    private Ui ui;
+    private final String fileName;
+    private final Ui ui;
 
     /**
      * Creates a Storage for the tasks
@@ -40,10 +41,10 @@ public class Storage {
      * @param tasklist The tasklist used to store tasks.
      */
     public void updateList(Tasklist tasklist) {
-        Task[] array = tasklist.getTasks();
+        ArrayList<Task> tasks = tasklist.getTasks();
         try (FileWriter writer = new FileWriter(this.fileName, false)) {
-            for (int i = 0; i < tasklist.getNumberOfTasks(); i++) {
-                writer.write(array[i].getInfo() + "\n");
+            for (Task task : tasks) {
+                writer.write(task.getInfo() + "\n");
             }
         } catch (IOException e) {
             System.out.println("Unable to update list");
@@ -75,7 +76,7 @@ public class Storage {
             }
         } catch (FileNotFoundException e) {
             System.out.println("Cannot find file");
-        } catch (ElmachoExceptions e) {
+        } catch (ElmachoException e) {
             System.out.println(e.getMessage());
         }
         return tasklist;

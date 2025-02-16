@@ -1,6 +1,6 @@
 package task;
 
-import exceptions.ElmachoExceptions;
+import exceptions.ElmachoException;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
@@ -19,7 +19,7 @@ public class TasklistTest {
         try {
             tasklist.delete(1);
             assertEquals(1, tasklist.getNumberOfTasks());
-        } catch (ElmachoExceptions e) {
+        } catch (ElmachoException e) {
             System.out.println(e.getMessage());
         }
     }
@@ -34,7 +34,7 @@ public class TasklistTest {
         try {
             tasklist.delete(2);
             fail();
-        } catch (ElmachoExceptions e){
+        } catch (ElmachoException e){
             assertEquals("Invalid task number.", e.getMessage());
         }
     }
