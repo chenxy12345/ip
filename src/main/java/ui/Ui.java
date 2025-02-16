@@ -4,6 +4,7 @@ import task.Task;
 import task.Tasklist;
 
 import java.util.ArrayList;
+import java.util.Random;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -23,10 +24,20 @@ public class Ui {
     }
 
     public String userGuide() {
-        String userGuide = "USER GUIDE TO ELMACHO:\n\nTo add a ToDo:\n   'todo [task name]'"
-                + "\nTo add a Deadline:\n   'deadline [task name] /by yyyy-MM-dd HHmm'"
-                + "\nTo add an Event:\n   'event [task name] /from yyyy-MM-dd HHmm /to yyyy-MM-dd HHmm'";
-        String userCommands = "\n\nLIST OF USER COMMANDS:\n\n1.list\n2.delete\n3.mark\n4.unmark\n5.find";
+        String userGuide = "QUICK USER GUIDE TO ELMACHO:\n"
+                + "\nTo add a ToDo:\n   'todo {task name}'"
+                + "\nTo add a Deadline:\n   'deadline {task name} /by yyyy-MM-dd HHmm'"
+                + "\nTo add an Event:\n   'event {task name} /from yyyy-MM-dd HHmm /to yyyy-MM-dd HHmm'\n";
+
+        String userCommands = "\nLIST OF USER COMMANDS:\n"
+                + "\n1.  list  <This shows the list of ACTIVE tasks>"
+                + "\n2. delete  {task number}"
+                + "\n3. mark  {task number}"
+                + "\n4. unmark  {task number}"
+                + "\n5. find  {keyword}"
+                + "\n6. archive  {task number}"
+                + "\n7. unarchive  {task number}"
+                + "\n8. archive list   <This shows the list of ARCHIVED tasks>";
         return userGuide + userCommands;
     }
 
@@ -100,5 +111,14 @@ public class Ui {
                 : "You avoiding your problems by archiving tasks:\n\n" + IntStream.range(0, tasklist.getNumberOfTasks())
                 .mapToObj(i -> (i + 1) + ". " + tasklist.getTasks().get(i))
                 .collect(Collectors.joining("\n"));
+    }
+    public void printMotivation() {
+        String[] messages = {"Queen Never Cry",
+                "You define your own life. Don't let other people write your script~",
+                "Life is tough...but so are you~",
+                "Don't let yesterday take up too much of today~",
+                "Queen Never Cry." };
+        Random random = new Random();
+        latestResponse = messages[random.nextInt(messages.length)];
     }
 }

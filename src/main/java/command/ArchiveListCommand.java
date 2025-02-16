@@ -3,9 +3,9 @@ package command;
 import task.Tasklist;
 import ui.Ui;
 
-public class ArchiveList extends Command {
+public class ArchiveListCommand extends Command {
 
-    public ArchiveList() {}
+    public ArchiveListCommand() {}
 
     /**
      * Executes the list command: displays the tasks in the tasklist.
@@ -16,4 +16,5 @@ public class ArchiveList extends Command {
     public void execute(Tasklist tasklist, Tasklist archivedTasklist, Ui ui) {
         ui.printArchivedList(archivedTasklist);
     }
+
 }

@@ -21,7 +21,7 @@ public class Main extends Application {
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
             stage.setScene(scene);
-            stage.setTitle("Elmacho");
+            stage.setTitle("Elmacho - Tasklist Assistant");
 
             stage.setMinHeight(300);
             stage.setMinWidth(525);

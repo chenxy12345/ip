@@ -61,6 +61,9 @@ public class Parser {
             case "list" -> {
                 return new ListCommand();
             }
+            case "motivate" -> {
+                return new MotivationCommand();
+            }
 
             // Loading of old tasks from storage
             case "T", "D", "E" -> {
@@ -150,7 +153,7 @@ public class Parser {
     public static int checkIndex(String[] parts) throws ElmachoException {
         try {
             if (parts.length <= 1 || parts[1].trim().isEmpty()) {
-                throw new ElmachoException("Task index not specified. Which task do you want to delete?");
+                throw new ElmachoException("Task index not specified. Which task do you mean?");
             }
             int number = Integer.parseInt(parts[1]);
             if (number <= 0) {
@@ -169,7 +172,7 @@ public class Parser {
                 throw new ElmachoException("Task to archive not specified. Complete your statement.");
             }
             if (parts[1].toLowerCase().trim().equals("list")) {
-                return new ArchiveList();
+                return new ArchiveListCommand();
             }
             int number = Integer.parseInt(parts[1]);
             if (number <= 0) {

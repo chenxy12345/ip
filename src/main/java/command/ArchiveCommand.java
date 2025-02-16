@@ -19,6 +19,9 @@ public class ArchiveCommand extends Command{
     public void execute(Tasklist tasklist, Tasklist archivedTasklist, Ui ui) {
         try {
             ArrayList<Task> tasks = tasklist.getTasks();
+            if (index <= 0 || index > tasks.size()) {
+                throw new ElmachoException("Invalid task number. Change it.");
+            }
             Task task = tasks.get(index - 1);
             assert task != null : "Task should not be null.";
 

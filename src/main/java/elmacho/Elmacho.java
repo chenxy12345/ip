@@ -1,6 +1,6 @@
 package elmacho;
 
-import command.ArchiveList;
+import command.ArchiveListCommand;
 import command.UnarchiveCommand;
 import task.Tasklist;
 
@@ -53,7 +53,8 @@ public class Elmacho {
             Command command = parser.parse(input);
             assert command != null : "Command should not be null.";
 
-            if (command instanceof ArchiveCommand || command instanceof UnarchiveCommand || command instanceof ArchiveList) {
+            if (command instanceof ArchiveCommand || command instanceof UnarchiveCommand
+                    || command instanceof ArchiveListCommand) {
                 command.execute(tasklist, archivedTasklist, ui);
                 archivedStorage.updateList(archivedTasklist);
             } else {
