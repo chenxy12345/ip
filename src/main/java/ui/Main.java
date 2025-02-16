@@ -24,7 +24,7 @@ public class Main extends Application {
             stage.setTitle("Elmacho");
 
             stage.setMinHeight(300);
-            stage.setMinWidth(550);
+            stage.setMinWidth(525);
 
             MainWindow controller = fxmlLoader.getController();
             controller.setElmacho(elmacho);
