@@ -23,6 +23,7 @@ public class Elmacho {
     public Elmacho() {
         this.ui = new Ui();
         this.storage = new Storage("Elmacho.txt");
+        assert storage != null: "Storage should not be null.";
         this.tasklist = storage.load();
         this.parser = new Parser();
         ui.start();
@@ -38,9 +39,11 @@ public class Elmacho {
 
 
     public String getResponse(String input) {
+        assert input != null : "Input should not be null.";
         try {
             Command command = parser.parse(input);
 
+            assert command != null : "Command should not be null.";
             // Execute the command and capture the response
             command.execute(tasklist, ui);
             storage.updateList(tasklist);
