@@ -29,9 +29,12 @@ public class UnmarkCommand extends Command {
      * @param ui The UI used to print the unmarked message.
      */
     public void execute(Tasklist tasklist, Ui ui) {
+        assert index >= 1 : "Index must be a positive integer.";
         tasklist.unmark(index - 1);
         ArrayList<Task> tasks = tasklist.getTasks();
         Task task = tasks.get(index - 1);
+
+        assert task != null : "Task should not be null.";
         ui.printUnmarked(task);
     }
 }

@@ -9,6 +9,7 @@ public class Deadline extends Task {
 
     public Deadline(String description, String by, boolean isDone) {
         super(description, isDone);
+        assert by != null : "Date should not be null";
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
         LocalDateTime dueTime = LocalDateTime.parse(by, formatter);
         this.by = dueTime;

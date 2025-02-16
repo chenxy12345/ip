@@ -64,6 +64,7 @@ public class Tasklist {
     }
 
     public Tasklist find(String keyword) {
+        assert keyword != null : "Keyword should not be null.";
         Tasklist filteredList = new Tasklist();
         for (Task task : tasks) {
             String[] words = task.getDescription().split(" ");

@@ -34,73 +34,61 @@ public class Parser {
      * @throws ElmachoException if the user input is incomplete or missing required details.
      */
     public static Command parse(String instruction) throws ElmachoException {
+        assert instruction != null : "Instruction must not be null.";
         String[] parts = instruction.split(" ", 2);
         String command = parts[0];
+        assert command != null : "Command must not be null.";
 
-        if (command.equals("delete")) {
-            try {
-                int number = Integer.parseInt(parts[1]);
+
+        switch (command) {
+            case "delete" -> {
+                int number = checkIndex(parts);
                 return new DeleteCommand(number);
-            } catch (NumberFormatException e) {
-                System.out.println("Enter a valid task number.");
             }
-        }
-        if (command.equals("mark")) {
-            try {
-                int number = Integer.parseInt(parts[1]);
+            case "mark" -> {
+                int number = checkIndex(parts);
                 return new MarkCommand(number);
-            } catch (NumberFormatException e) {
-                System.out.println("Enter a valid task number.");
             }
-        }
-        if (command.equals("unmark")) {
-            try {
-                int number = Integer.parseInt(parts[1]);
+            case "unmark" -> {
+                int number = checkIndex(parts);
                 return new UnmarkCommand(number);
-            } catch (NumberFormatException e) {
-                System.out.println("Enter a valid task number.");
+            }
+            case "find" -> {
+                String keyword = checkArgs(parts);
+                return new FindCommand(keyword);
+            }
+            case "bye" -> {
+                return new ExitCommand();
+            }
+            case "list" -> {
+                return new ListCommand();
+            }
+
+            // Loading of old tasks from storage
+            case "T", "D", "E" -> {
+                return reloadTask(command, parts);
+            }
+
+            // Adding of new tasks
+            case "todo", "deadline", "event" -> {
+                String description = checkArgs(parts);
+                return makeNewTask(command, description);
             }
         }
-        if (command.equals("find")) {
-            String keyword = parts[1].trim();
-            return new FindCommand(keyword);
-        }
 
-        // Loading of tasks from storage
-        if (command.equals("T") || command.equals("D") || command.equals("E")) {
-            return reloadTask(command, parts);
-        }
-
-        if (command.equals("bye")) {
-            return new ExitCommand();
-        }
-
-        if (command.equals("list")) {
-            return new ListCommand();
-        }
-
-        // Adding of tasks
-        if (command.equals("todo") || command.equals("deadline") || command.equals("event")) {
-            if (parts.length == 1 || parts[1].trim().isEmpty()) {
-                throw new ElmachoException("HELLOOOO!!! Your task is empty??!??!");
-            } else {
-                return makeNewTask(command, parts);
-            }
-        }
         return new Command();
     }
 
-    public static Command makeNewTask(String command, String[] description) throws ElmachoException {
+    public static Command makeNewTask(String command, String description) throws ElmachoException {
         switch (command) {
             case "todo" -> {
-                String task = description[1].trim();
+                String task = description.trim();
                 return new AddCommand(new ToDo(task, false));
             }
             case "deadline" -> {
-                String[] deadlineDetails = description[1].split("/by ", 2);  // Split on "/by " with a limit of 2
+                String[] deadlineDetails = description.split("/by ", 2);  // Split on "/by " with a limit of 2
 
                 if (deadlineDetails.length < 2) {
-                    System.out.println(description);
                     throw new ElmachoException("HELLOOO! When is the deadline??");
                 }
                 String task = deadlineDetails[0].trim();
@@ -109,7 +97,7 @@ public class Parser {
                 return new AddCommand(new Deadline(task, dueDate, false));
             }
             case "event" -> {
-                String[] eventDetails = description[1].split("/from ", 2);
+                String[] eventDetails = description.split("/from ", 2);
                 if (eventDetails.length < 2) {
                     throw new ElmachoException("HELLOOO! When does your event start??");
                 }
@@ -152,5 +140,28 @@ public class Parser {
             }
         }
         return new Command();
+    }
+
+    public static String checkArgs(String[] parts) throws ElmachoException {
+        if (parts.length <= 1 || parts[1].trim().isEmpty()) {
+            throw new ElmachoException("Description not specified. Complete your statement.");
+        }
+        return parts[1].trim();
+    }
+
+    public static int checkIndex(String[] parts) throws ElmachoException {
+        try {
+            if (parts.length <= 1 || parts[1].trim().isEmpty()) {
+                throw new ElmachoException("Task index not specified. Which task do you want to delete?");
+            }
+            int number = Integer.parseInt(parts[1]);
+            if (number <= 0) {
+                throw new ElmachoException("Invalid index given.");
+            }
+            return number;
+        } catch (NumberFormatException e) {
+            System.out.println("Enter a valid task number.");
+        }
+        return -1;
     }
 }

@@ -10,6 +10,7 @@ public class Event extends Task {
 
     public Event(String description, String from, String to, boolean isDone) {
         super(description, isDone);
+        assert from != null && to != null : "Dates should not be null";
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
         LocalDateTime fromTime = LocalDateTime.parse(from, formatter);
         LocalDateTime toTime = LocalDateTime.parse(to, formatter);
