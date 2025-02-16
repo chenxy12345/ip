@@ -11,15 +11,15 @@ This is _Elmacho_! A personal tasklist assistant that records all your tasks.
 2. Deadline
 3. Event
 
-### To create Tasks, run:
-ToDo :clipboard:
-`todo {task description}`\
+## To create Tasks, run:
+### ToDo :clipboard:   
+Format: `todo {task description}`\
 **eg. todo fold clothes**<br><br>
-Deadline :date:
-`deadline {task decription} /by {yyyy-MM-dd HHmm}`\
+### Deadline :date:
+Format: `deadline {task decription} /by {yyyy-MM-dd HHmm}`\
 **eg. deadline tutorial 4 /by 2025-02-16 2359**<br><br>
-Event :spiral_calendar:
-`event {task description} /from {yyyy-MM-dd HHmm} /to {yyyy-MM-dd HHmm}`\
+### Event :spiral_calendar:
+Format: `event {task description} /from {yyyy-MM-dd HHmm} /to {yyyy-MM-dd HHmm}`\
 **eg. event club cohesion /from 2025-02-20 1500 /to 2025-02-20 2200**\
 
 ### If tasks are successfully stored, the output will be as follows:
@@ -121,7 +121,7 @@ _List of features and formats will appear_
 Format: `bye`  
 _Elmacho exits_
 > [!CAUTION]
-> Only delete when you're sure you've finished the task!
+> Only delete when you're sure you've finished the task!   
 > Archive if you may still go back to it.
 
 ## Starting Elmacho
@@ -131,7 +131,7 @@ _Elmacho exits_
 - Alternatively, clone the Github Repository.
 > git clone _input URL_
 3. Navigate to the Directory the file is in
-> `cd /path/to/your/jar/file'
+> `cd /path/to/your/jar/file`
 4. Run the `.jar` file
 > java -jar elmacho.jar
 > 
