@@ -33,6 +33,8 @@ public class DeleteCommand extends Command {
      */
     @Override
     public void execute(Tasklist tasklist, Ui ui) {
+        assert index >= 1: "Index must be a positive integer.";
+
         try {
             ArrayList<Task> tasks = tasklist.getTasks();
             // Check if index is valid before getting the task
@@ -40,6 +42,7 @@ public class DeleteCommand extends Command {
                 throw new ElmachoException("Invalid task number.");
             }
             Task task = tasks.get(index - 1);
+            assert task != null: "Task should not be null.";
             tasklist.delete(index);
             ui.printDeleteMessage(tasklist, task);
         } catch (ElmachoException e) {

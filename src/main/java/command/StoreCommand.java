@@ -26,6 +26,7 @@ public class StoreCommand extends Command {
      */
     @Override
     public void execute(Tasklist tasklist, Ui ui) {
+        assert task != null : "Task should not be null.";
         tasklist.add(task);
     }
 }
