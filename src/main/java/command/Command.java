@@ -7,9 +7,10 @@ import ui.Ui;
 
 public class Command {
 
-    public Command() {}
+    public Command() {
+    }
 
-    public void execute(Tasklist tasklist, Ui ui) {
+    public void execute(Tasklist tasklist, Tasklist archivedTasklist, Ui ui) {
         ui.help();
     }
 }

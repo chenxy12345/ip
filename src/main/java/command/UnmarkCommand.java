@@ -28,7 +28,7 @@ public class UnmarkCommand extends Command {
      * @param tasklist The tasklist that contains the task to be unmarked.
      * @param ui The UI used to print the unmarked message.
      */
-    public void execute(Tasklist tasklist, Ui ui) {
+    public void execute(Tasklist tasklist, Tasklist archivedTasklist, Ui ui) {
         assert index >= 1 : "Index must be a positive integer.";
         tasklist.unmark(index - 1);
         ArrayList<Task> tasks = tasklist.getTasks();

@@ -27,7 +27,7 @@ public class AddCommand extends Command {
      * @param ui The UI used to print the add message.
      */
     @Override
-    public void execute(Tasklist tasklist, Ui ui) {
+    public void execute(Tasklist tasklist, Tasklist archivedTasklist, Ui ui) {
         assert task != null : "Task should not be null.";
         tasklist.add(this.task);
         ui.printAddMessage(tasklist, this.task);

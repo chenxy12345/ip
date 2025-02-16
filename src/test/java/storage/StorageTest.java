@@ -17,7 +17,9 @@ public class StorageTest {
     @Test
     public void load_success() throws IOException {
         Storage storage = new Storage("StorageTestingFile.txt");
-        Tasklist resultTasklist = storage.load();
+        Tasklist tasklist = new Tasklist();
+        Tasklist archivedTasklist = new Tasklist();
+        Tasklist resultTasklist = storage.load(tasklist, archivedTasklist);
         String expectedTask1 = "T 1/ma1522";
         String expectedTask2 = "D 0/ma1521/by2020-01-01 1900";
         ArrayList<Task> resultTask = (resultTasklist.getTasks());

@@ -1,10 +1,11 @@
 package elmacho;
 
-import javafx.application.Platform;
+import command.ArchiveList;
+import command.UnarchiveCommand;
 import task.Tasklist;
 
 import command.Command;
-import command.ExitCommand;
+import command.ArchiveCommand;
 
 import exceptions.ElmachoException;
 
@@ -16,15 +17,23 @@ import storage.Storage;
 public class Elmacho {
 
     private final Storage storage;
+    private final Storage archivedStorage;
     private final Ui ui;
     private Tasklist tasklist;
+    private Tasklist archivedTasklist;
     private Parser parser;
 
     public Elmacho() {
         this.ui = new Ui();
-        this.storage = new Storage("Elmacho.txt");
+        this.storage = new Storage("files/ElMacho.txt");
         assert storage != null: "Storage should not be null.";
-        this.tasklist = storage.load();
+
+        this.tasklist = new Tasklist();
+        this.archivedTasklist = new Tasklist();
+        this.tasklist = storage.load(tasklist, archivedTasklist);
+
+        this.archivedStorage = new Storage("files/ElMachoArchived.txt");
+        this.archivedTasklist = archivedStorage.load(archivedTasklist, tasklist);
         this.parser = new Parser();
         ui.start();
     }
@@ -42,13 +51,16 @@ public class Elmacho {
         assert input != null : "Input should not be null.";
         try {
             Command command = parser.parse(input);
-
             assert command != null : "Command should not be null.";
-            // Execute the command and capture the response
-            command.execute(tasklist, ui);
-            storage.updateList(tasklist);
 
-            // Return the latest UI response
+            if (command instanceof ArchiveCommand || command instanceof UnarchiveCommand || command instanceof ArchiveList) {
+                command.execute(tasklist, archivedTasklist, ui);
+                archivedStorage.updateList(archivedTasklist);
+            } else {
+                command.execute(tasklist, archivedTasklist, ui);
+                storage.updateList(tasklist);
+            }
+
             return ui.getLatestResponse();
 
         } catch (ElmachoException e) {

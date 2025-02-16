@@ -25,7 +25,7 @@ public class StoreCommand extends Command {
      * @param tasklist The tasklist that contains the tasks to be stored
      */
     @Override
-    public void execute(Tasklist tasklist, Ui ui) {
+    public void execute(Tasklist tasklist, Tasklist archivedTasklist, Ui ui) {
         assert task != null : "Task should not be null.";
         tasklist.add(task);
     }

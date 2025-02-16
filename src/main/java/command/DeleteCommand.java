@@ -32,7 +32,7 @@ public class DeleteCommand extends Command {
      * @throws ElmachoException if the task at the specified index does not exist.
      */
     @Override
-    public void execute(Tasklist tasklist, Ui ui) {
+    public void execute(Tasklist tasklist, Tasklist archivedTasklist, Ui ui) {
         assert index >= 1: "Index must be a positive integer.";
 
         try {

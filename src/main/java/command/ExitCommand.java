@@ -13,7 +13,7 @@ public class ExitCommand extends Command {
     public ExitCommand() {}
 
     @Override
-    public void execute(Tasklist tasklist, Ui ui) {
+    public void execute(Tasklist tasklist, Tasklist archivedTasklist, Ui ui) {
         Platform.exit();
     }
 }

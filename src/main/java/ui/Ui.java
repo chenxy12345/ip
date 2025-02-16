@@ -53,7 +53,7 @@ public class Ui {
     public void printTaskList(Tasklist tasklist) {
         latestResponse = tasklist.getTasks().isEmpty()
                 ? "List is empty"
-                : IntStream.range(0, tasklist.getNumberOfTasks())
+                : "Your never ending list:\n\n" + IntStream.range(0, tasklist.getNumberOfTasks())
                 .mapToObj(i -> (i + 1) + ". " + tasklist.getTasks().get(i))
                 .collect(Collectors.joining("\n"));
     }
@@ -82,4 +82,23 @@ public class Ui {
         }
     }
 
+    public void printArchivedTask(Tasklist tasklist, Tasklist archivedTasklist, Task task) {
+        assert task != null : "Task should not be null.";
+        latestResponse = "Archived task:\n  " + task + "\nNow you have " + archivedTasklist.getNumberOfTasks()
+                + " tasks in the archived list,"
+                + "\n"  + tasklist.getNumberOfTasks() + " tasks in the list.";
+    }
+
+    public void printUnarchivedTask(Tasklist tasklist, Task task) {
+        assert task != null : "Task should not be null.";
+        latestResponse = "Unarchived task:\n  " + task + "\nNow you have " + tasklist.getNumberOfTasks()
+                + " tasks in the list";
+    }
+    public void printArchivedList(Tasklist tasklist) {
+        latestResponse = tasklist.getTasks().isEmpty()
+                ? "List is empty"
+                : "You avoiding your problems by archiving tasks:\n\n" + IntStream.range(0, tasklist.getNumberOfTasks())
+                .mapToObj(i -> (i + 1) + ". " + tasklist.getTasks().get(i))
+                .collect(Collectors.joining("\n"));
+    }
 }

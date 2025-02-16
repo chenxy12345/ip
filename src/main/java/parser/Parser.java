@@ -1,18 +1,9 @@
 package parser;
 
+import command.*;
 import task.Deadline;
 import task.Event;
 import task.ToDo;
-
-import command.Command;
-import command.AddCommand;
-import command.DeleteCommand;
-import command.ExitCommand;
-import command.FindCommand;
-import command.ListCommand;
-import command.MarkCommand;
-import command.StoreCommand;
-import command.UnmarkCommand;
 
 import exceptions.ElmachoException;
 
@@ -52,6 +43,13 @@ public class Parser {
             case "unmark" -> {
                 int number = checkIndex(parts);
                 return new UnmarkCommand(number);
+            }
+            case "archive" -> {
+                return parseArchive(parts);
+            }
+            case "unarchive" -> {
+                int number = checkIndex(parts);
+                return new UnarchiveCommand(number);
             }
             case "find" -> {
                 String keyword = checkArgs(parts);
@@ -163,5 +161,24 @@ public class Parser {
             System.out.println("Enter a valid task number.");
         }
         return -1;
+    }
+
+    public static Command parseArchive(String[] parts) throws ElmachoException {
+        try {
+            if (parts.length <= 1 || parts[1].trim().isEmpty()) {
+                throw new ElmachoException("Task to archive not specified. Complete your statement.");
+            }
+            if (parts[1].toLowerCase().trim().equals("list")) {
+                return new ArchiveList();
+            }
+            int number = Integer.parseInt(parts[1]);
+            if (number <= 0) {
+                throw new ElmachoException("Invalid index given.");
+            }
+            return new ArchiveCommand(number);
+        } catch (NumberFormatException e) {
+            System.out.println("Enter a valid task number.");
+        }
+        return new Command();
     }
 }

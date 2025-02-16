@@ -1,15 +1,11 @@
 package command;
 
 import task.Tasklist;
-
 import ui.Ui;
 
-/**
- * Represents a command to print all the tasks in the tasklist to the UI.
- */
-public class ListCommand extends Command {
+public class ArchiveList extends Command {
 
-    public ListCommand() {}
+    public ArchiveList() {}
 
     /**
      * Executes the list command: displays the tasks in the tasklist.
@@ -18,6 +14,6 @@ public class ListCommand extends Command {
      */
     @Override
     public void execute(Tasklist tasklist, Tasklist archivedTasklist, Ui ui) {
-        ui.printTaskList(tasklist);
+        ui.printArchivedList(archivedTasklist);
     }
 }

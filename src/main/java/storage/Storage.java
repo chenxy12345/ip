@@ -56,16 +56,16 @@ public class Storage {
      * Loads the data from the file when the chatbot starts up.
      * @return The tasklist stored.
      */
-    public Tasklist load() {
+    public Tasklist load(Tasklist tasklist, Tasklist otherTasklist) {
         File file = new File(fileName);
         Parser parser = new Parser();
-        Tasklist tasklist = new Tasklist();
 
         if (!file.exists()) {
             try {
                 file.createNewFile();
             } catch (IOException e) {
-                System.out.println("Unable to create new file");
+                System.out.println("Unable to create new file: " + fileName);
+                return tasklist; // Return empty tasklist on error
             }
         }
 
@@ -75,10 +75,10 @@ public class Storage {
                 Command command = parser.parse(line);
 
                 assert command != null : "Command must not be null.";
-                command.execute(tasklist, this.ui);
+                command.execute(tasklist, otherTasklist, this.ui);
             }
         } catch (FileNotFoundException e) {
-            System.out.println("Cannot find file");
+            System.out.println("Cannot find file: " + fileName);
         } catch (ElmachoException e) {
             System.out.println(e.getMessage());
         }
