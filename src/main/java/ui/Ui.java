@@ -37,8 +37,10 @@ public class Ui {
                 + "\n5. find  {keyword}"
                 + "\n6. archive  {task number}"
                 + "\n7. unarchive  {task number}"
-                + "\n8. archive list   <This shows the list of ARCHIVED tasks>";
-        return userGuide + userCommands;
+                + "\n8. archive list   <This shows the list of ARCHIVED tasks>"
+                + "\n9. motivate me   <You get a motivational line>";
+        latestResponse = userGuide + userCommands;
+        return latestResponse;
     }
 
     public String start() {

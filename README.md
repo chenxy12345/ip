@@ -1,24 +1,140 @@
-# elmacho.Elmacho project template
+# Elmacho - Tasklist Assistant
 
-This is a project template for a greenfield Java project. It's named after the Java mascot _Duke_. Given below are instructions on how to use it.
+This is _Elmacho_! A personal tasklist assistant that records all your tasks.
+![seaOtter.png](src/main/resources/images/seaOtter.png)
 
-## Setting up in Intellij
+## Here are the types of Tasks available:
+:bulb: 
+:memo:
+:pencil:
+1. ToDo
+2. Deadline
+3. Event
 
-Prerequisites: JDK 17, update Intellij to the most recent version.
+### To create Tasks, run:
+ToDo :clipboard:
+`todo {task description}`\
+**eg. todo fold clothes**<br><br>
+Deadline :date:
+`deadline {task decription} /by {yyyy-MM-dd HHmm}`\
+**eg. deadline tutorial 4 /by 2025-02-16 2359**<br><br>
+Event :spiral_calendar:
+`event {task description} /from {yyyy-MM-dd HHmm} /to {yyyy-MM-dd HHmm}`\
+**eg. event club cohesion /from 2025-02-20 1500 /to 2025-02-20 2200**\
 
-1. Open Intellij (if you are not in the welcome screen, click `File` > `Close Project` to close the existing project first)
-1. Open the project into Intellij as follows:
-   1. Click `Open`.
-   1. Select the project directory, and click `OK`.
-   1. If there are any further prompts, accept the defaults.
-1. Configure the project to use **JDK 17** (not other versions) as explained in [here](https://www.jetbrains.com/help/idea/sdk.html#set-up-jdk).<br>
-   In the same dialog, set the **Project language level** field to the `SDK default` option.
-1. After that, locate the `src/main/java/elmacho.Elmacho.java` file, right-click it, and choose `Run elmacho.Elmacho.main()` (if the code editor is showing compile errors, try restarting the IDE). If the setup is correct, you should see something like the below as the output:
-   ```
-   ____________________________________________________________
-   What. I'm elmacho.Elmacho
-   What you want?
-   ____________________________________________________________
-   ```
+### If tasks are successfully stored, the output will be as follows:
 
-**Warning:** Keep the `src\main\java` folder as the root folder for Java files (i.e., don't rename those folders or move Java files to another folder outside of this folder path), as this is the default location some tools (e.g., Gradle) expect to find Java files.
+```
+Added Task: 
+  [T][ ] fold clothes 
+Now you have 1 tasks in the list.
+```
+
+
+```
+Added Task:
+  [D][ ] tutorial 4 (By: Feb 16 2025 11:59pm)
+Now you have 2 tasks in the list.
+```
+
+
+```
+Added Task:
+  [E][ ] club cohesion (From: Feb 20 2025 3:00pm To: Feb 20 2025 10:00pm)
+Now you have 3 tasks in the list.
+```
+
+## Features:
+### Deleting a task :`delete` 
+Format: `delete {task number}`
+_eg. delete 1_
+```
+Deleted Task: 
+  [T][ ] fold clothes 
+Now you have 2 tasks in the list.
+```
+<br>
+
+### Marking a task complete: `mark`
+Format: `mark {task number}`
+_eg. mark 1_
+```
+Finally. Marked this task as done: 
+  [X] fold clothes 
+```
+<br>
+
+### Unmarking a task: `unmark` 
+Format: `unmark {task number}`
+_eg. unmark 1_
+```
+Another task not done...: 
+  [ ] tutorial 4
+```
+<br>
+
+### Archiving a task: `archive`
+Format: `archive {task number}`
+_eg. archive 2_
+```
+Archived task: 
+  [T][ ] tutorial 4
+Now you have 1 tasks in the archived list,
+2 tasks in the list.
+```
+<br>
+
+### Unarchiving a task: `unarchive`
+Format: `unarchive {task number}`
+_eg.  unarchive 1_
+```
+Unarchived task: 
+  [T][ ] tutorial 4
+Now you have 3 tasks in the list.
+```
+<br>
+
+### Finding tasks through keywords: `find`
+`find {keyword}`
+_eg. find tutorial_
+```
+2.[D][ ] tutorial 4 (By: Feb 16 2025 11:59pm)
+```
+<br>
+
+### Displaying full tasklist: `list/archive list`
+Format: `list / archive list`
+_eg. list / archive list_
+```
+1.[T][X] fold clothes 
+2.[D][ ] tutorial 4 (By: Feb 16 2025 11:59pm)
+3.[E][ ] club cohesion (From: Feb 20 2025 3:00pm To: Feb 20 2025 10:00pm)
+```
+<br>
+
+### Viewing help: `help`
+Format: `help`  
+_List of features and formats will appear_
+<br>
+
+### Exiting the program: `bye`
+Format: `bye`  
+_Elmacho exits_
+> [!CAUTION]
+> Only delete when you're sure you've finished the task!
+> Archive if you may still go back to it.
+
+## Starting Elmacho
+1. Ensure the right java version is installed
+> `java -version`
+2. Download the `.jar` file
+- Alternatively, clone the Github Repository.
+> git clone _input URL_
+3. Navigate to the Directory the file is in
+> `cd /path/to/your/jar/file'
+4. Run the `.jar` file
+> java -jar elmacho.jar
+> 
+A GUI similar to below should appear in a few seconds.
+![Welcome.png](src/main/resources/images/Welcome.png)
+5. Type the command in the command box and press `Send` to execute it.

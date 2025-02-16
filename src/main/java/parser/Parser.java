@@ -7,6 +7,7 @@ import command.Command;
 import command.DeleteCommand;
 import command.ExitCommand;
 import command.FindCommand;
+import command.HelpCommand;
 import command.ListCommand;
 import command.MarkCommand;
 import command.MotivationCommand;
@@ -76,6 +77,9 @@ public class Parser {
             }
             case "motivate" -> {
                 return new MotivationCommand();
+            }
+            case "help" -> {
+                return new HelpCommand();
             }
 
             // Loading of old tasks from storage
