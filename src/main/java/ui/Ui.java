@@ -4,6 +4,8 @@ import task.Task;
 import task.Tasklist;
 
 import java.util.ArrayList;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class Ui {
 
@@ -49,18 +51,11 @@ public class Ui {
     }
 
     public void printTaskList(Tasklist tasklist) {
-        ArrayList<Task> tasks = tasklist.getTasks();
-        if (tasks.isEmpty()) {
-            latestResponse = "List is empty";
-        } else {
-            int i = 1;
-            String result = "";
-            for (Task task : tasks) {
-                result = result + i + ". " + task + "\n";
-                i++;
-            }
-            latestResponse = result;
-        }
+        latestResponse = tasklist.getTasks().isEmpty()
+                ? "List is empty"
+                : IntStream.range(0, tasklist.getNumberOfTasks())
+                .mapToObj(i -> (i + 1) + ". " + tasklist.getTasks().get(i))
+                .collect(Collectors.joining("\n"));
     }
 
     public void printMarked(Task task) {
@@ -75,18 +70,15 @@ public class Ui {
                 + task.getStatusIcon() + "] " + task.getDescription();
     }
 
-    public void printFilteredTasklist(Tasklist tasklist) {
+    public void printFilteredTasklist(Tasklist tasklist, String keyword) {
         ArrayList<Task> tasks = tasklist.getTasks();
         if (tasks.isEmpty()) {
             latestResponse = "Nothing matched your keyword aw so sad";
         } else {
-            int i = 1;
-            String result = "";
-            for (Task task : tasks) {
-                result = result + i + ". " + task + "\n";
-                i++;
-            }
-            latestResponse = result;
+            latestResponse = IntStream.range(0, tasklist.getNumberOfTasks())
+                    .filter(i -> tasklist.getTasks().get(i).getDescription().contains(keyword))
+                    .mapToObj(i -> (i + 1) + ". " + tasklist.getTasks().get(i))
+                    .collect(Collectors.joining("\n"));
         }
     }
 
