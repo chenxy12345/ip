@@ -41,8 +41,9 @@ public class Parser {
     public static Command parse(String instruction) throws ElmachoException {
         assert instruction != null : "Instruction must not be null.";
         String[] parts = instruction.split(" ", 2);
-        String command = parts[0];
-        assert command != null : "Command must not be null.";
+
+        assert parts[0] != null : "Command must not be null.";
+        String command = parts[0].trim();
 
 
         switch (command) {

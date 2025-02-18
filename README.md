@@ -14,13 +14,13 @@ This is _Elmacho_! A personal tasklist assistant that records all your tasks.
 ## To create Tasks, run:
 ### ToDo :clipboard:   
 Format: `todo {task description}`\
-**eg. todo fold clothes**<br><br>
+_eg. todo fold clothes_<br><br>
 ### Deadline :date:
 Format: `deadline {task decription} /by {yyyy-MM-dd HHmm}`\
-**eg. deadline tutorial 4 /by 2025-02-16 2359**<br><br>
+_eg. deadline tutorial 4 /by 2025-02-16 2359_<br><br>
 ### Event :spiral_calendar:
 Format: `event {task description} /from {yyyy-MM-dd HHmm} /to {yyyy-MM-dd HHmm}`\
-**eg. event club cohesion /from 2025-02-20 1500 /to 2025-02-20 2200**\
+_eg. event club cohesion /from 2025-02-20 1500 /to 2025-02-20 2200_\
 
 ### If tasks are successfully stored, the output will be as follows:
 
