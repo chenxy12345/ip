@@ -2,6 +2,7 @@
 
 This is _Elmacho_! A personal tasklist assistant that records all your tasks.
 ![seaOtter.png](src/main/resources/images/seaOtter.png)
+> "What. I'm Elmacho. What you want?" — Elmacho
 
 ## Here are the types of Tasks available:
 :bulb: 
