@@ -8,9 +8,9 @@ This is _Elmacho_! A personal tasklist assistant that records all your tasks.
 :bulb: 
 :memo:
 :pencil:
-1. ToDo
-2. Deadline
-3. Event
+- ToDo 
+- Deadline 
+- Event
 
 ## To create Tasks, run:
 ### ToDo :clipboard:   
@@ -139,3 +139,5 @@ _Elmacho exits_
 A GUI similar to below should appear in a few seconds.
 ![Welcome.png](src/main/resources/images/Welcome.png)
 5. Type the command in the command box and press `Send` to execute it.
+
+**To view the github repository: click [here](https://github.com/chenxy12345/ip)**
