@@ -130,7 +130,7 @@ _Elmacho exits_
 > `java -version`
 2. Download the `.jar` file
 - Alternatively, clone the Github Repository.
-> git clone [_input URL_](https://github.com/chenxy12345/ip)
+> `git clone https://github.com/chenxy12345/ip`
 3. Navigate to the Directory the file is in
 > `cd /path/to/your/jar/file`
 4. Run the `.jar` file
