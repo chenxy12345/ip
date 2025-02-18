@@ -2,6 +2,7 @@
 
 This is _Elmacho_! A personal tasklist assistant that records all your tasks.
 ![seaOtter.png](src/main/resources/images/seaOtter.png)
+> "What. I'm Elmacho. What you want?" — Elmacho
 
 ## Here are the types of Tasks available:
 :bulb: 
@@ -129,7 +130,7 @@ _Elmacho exits_
 > `java -version`
 2. Download the `.jar` file
 - Alternatively, clone the Github Repository.
-> git clone _input URL_
+> `git clone https://github.com/chenxy12345/ip`
 3. Navigate to the Directory the file is in
 > `cd /path/to/your/jar/file`
 4. Run the `.jar` file
