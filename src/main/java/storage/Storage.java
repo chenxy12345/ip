@@ -58,14 +58,24 @@ public class Storage {
      */
     public Tasklist load(Tasklist tasklist, Tasklist otherTasklist) {
         File file = new File(fileName);
+        File parentDir = file.getParentFile();
         Parser parser = new Parser();
 
+        // To create new Directory
+        if (parentDir != null && !parentDir.exists()) {
+            if (!parentDir.mkdirs()) {
+                System.out.println("Unable to create directories: " + parentDir.getAbsolutePath());
+                return tasklist;
+            }
+        }
+
+        // To create a new file in that directory
         if (!file.exists()) {
             try {
                 file.createNewFile();
             } catch (IOException e) {
                 System.out.println("Unable to create new file: " + fileName);
-                return tasklist; // Return empty tasklist on error
+                return tasklist;
             }
         }
 
