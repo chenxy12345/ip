@@ -173,7 +173,7 @@ public class Parser {
             if (parts.length <= 1 || parts[1].trim().isEmpty()) {
                 throw new ElmachoException("Task number not specified. Which task do you mean?");
             }
-            int number = Integer.parseInt(parts[1]);
+            int number = Integer.parseInt(parts[1].trim());
             if (number <= 0) {
                 throw new ElmachoException("Invalid task number given.");
             }
@@ -192,7 +192,7 @@ public class Parser {
             if (parts[1].toLowerCase().trim().equals("list")) {
                 return new ArchiveListCommand();
             }
-            int number = Integer.parseInt(parts[1]);
+            int number = Integer.parseInt(parts[1].trim());
             if (number <= 0) {
                 throw new ElmachoException("Invalid task number given.");
             }
