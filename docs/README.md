@@ -155,4 +155,4 @@ _Elmacho exits_
 
 >**To view the github repository: click [here](https://github.com/chenxy12345/ip)**
 
-**Do comment any feedback/improvement!:smile:**
+**Do comment any feedback/improvement!** :smile:
