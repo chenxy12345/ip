@@ -28,10 +28,24 @@ test {
     }
 }
 
-checkstyle {
-    toolVersion = '10.0'
-    configFile = file('/Users/chenxy/Documents/ip/config/checkstyle/checkstyle.xml')
+checkstyleMain {
+    source 'src/main/java'  // Adjust as per your source folder location
+    configFile = file("/Users/chenxy/Documents/ip/config/checkstyle/checkstyle.xml") as File
 }
+
+checkstyle {
+    toolVersion = '10.2'
+    configFile = file("/Users/chenxy/Documents/ip/config/checkstyle/checkstyle.xml") as File
+}
+
+
+
+checkstyleTest {
+    source 'src/test/java'  // Adjust as per your test folder location
+    configFile = file("/Users/chenxy/Documents/ip/config/checkstyle/checkstyle.xml") as File
+}
+
+
 
 application {
     mainClassName = "elmacho.Launcher"
@@ -45,3 +59,9 @@ shadowJar {
 run{
     standardInput = System.in
 }
+
+dependencies {
+    checkstyle 'com.puppycrawl.tools:checkstyle:10.2'
+}
+
+

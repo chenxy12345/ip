@@ -1,9 +1,7 @@
 package command;
 
-import exceptions.ElmachoException;
 import javafx.application.Platform;
 import task.Tasklist;
-
 import ui.Ui;
 
 /**

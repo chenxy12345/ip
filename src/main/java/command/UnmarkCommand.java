@@ -1,12 +1,11 @@
 package command;
 
+import java.util.ArrayList;
+
 import exceptions.ElmachoException;
 import task.Task;
 import task.Tasklist;
-
 import ui.Ui;
-
-import java.util.ArrayList;
 
 /**
  * Represents a command to mark a task as uncompleted and print the unmarked confirmation message to the UI.

@@ -7,15 +7,12 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import command.Command;
+import exceptions.ElmachoException;
+import parser.Parser;
 import task.Task;
 import task.Tasklist;
-
-import command.Command;
-
-import parser.Parser;
 import ui.Ui;
-
-import exceptions.ElmachoException;
 
 /**
  * Handles loading and updating of  stored task database.

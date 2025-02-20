@@ -10,7 +10,7 @@ import task.Tasklist;
 
 public class Ui {
 
-    private final String NAME = "Elmacho";
+    private final String name = "Elmacho";
 
     private String latestResponse;
 
@@ -44,7 +44,7 @@ public class Ui {
     }
 
     public String start() {
-        return "What. I'm " + NAME + "\nWhat you want?";
+        return "What. I'm " + name + "\nWhat you want?";
     }
 
     public void help() {

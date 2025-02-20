@@ -1,12 +1,11 @@
 package command;
 
+import java.util.ArrayList;
+
 import exceptions.ElmachoException;
 import task.Task;
 import task.Tasklist;
-
 import ui.Ui;
-
-import java.util.ArrayList;
 
 /**
  * Represents a command to mark a task as completed and print the marked confirmation message to the UI.

@@ -14,12 +14,10 @@ import command.MotivationCommand;
 import command.StoreCommand;
 import command.UnarchiveCommand;
 import command.UnmarkCommand;
-
+import exceptions.ElmachoException;
 import task.Deadline;
 import task.Event;
 import task.ToDo;
-
-import exceptions.ElmachoException;
 
 /**
  * This class is responsible for interpreting user input and converting it into executable commands.

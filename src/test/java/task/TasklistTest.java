@@ -1,9 +1,11 @@
 package task;
 
-import exceptions.ElmachoException;
-import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
+
+import org.junit.jupiter.api.Test;
+
+import exceptions.ElmachoException;
 
 public class TasklistTest {
 
@@ -37,5 +39,23 @@ public class TasklistTest {
         } catch (ElmachoException e){
             assertEquals("Invalid task number.", e.getMessage());
         }
+    }
+
+    @Test
+    public void markTask_success() {
+        Tasklist tasklist = new Tasklist();
+        tasklist.add(new ToDo("testing 1", false));
+        tasklist.mark(0);
+        boolean expected = true;
+        assertEquals(expected, tasklist.getTasks().get(0).isDone);
+    }
+
+    @Test
+    public void unmarkTask_success() {
+        Tasklist tasklist = new Tasklist();
+        tasklist.add(new ToDo("testing 1", true));
+        tasklist.unmark(0);
+        boolean expected = false;
+        assertEquals(expected, tasklist.getTasks().get(0).isDone);
     }
 }

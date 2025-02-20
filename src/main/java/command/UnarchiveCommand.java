@@ -1,11 +1,11 @@
 package command;
 
+import java.util.ArrayList;
+
 import exceptions.ElmachoException;
 import task.Task;
 import task.Tasklist;
 import ui.Ui;
-
-import java.util.ArrayList;
 
 public class UnarchiveCommand extends Command {
 

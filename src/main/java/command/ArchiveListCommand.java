@@ -1,6 +1,5 @@
 package command;
 
-import exceptions.ElmachoException;
 import task.Tasklist;
 import ui.Ui;
 

@@ -1,12 +1,11 @@
 package command;
 
+import java.util.ArrayList;
+
+import exceptions.ElmachoException;
 import task.Task;
 import task.Tasklist;
-
 import ui.Ui;
-
-import java.util.ArrayList;
-import exceptions.ElmachoException;
 
 /**
  * Represents a command to delete a task from the tasklist and print the confirmation message to the UI.

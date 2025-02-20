@@ -1,7 +1,7 @@
 # Elmacho - Tasklist Assistant User Guide
 
 This is _Elmacho_! A personal tasklist assistant that records all your tasks.
-![seaOtter.png](/src/main/resources/images/seaOtter.png)
+![seaOtter.png](/docs/images/seaOtter.png)
 > "What. I'm Elmacho. What you want?" — Elmacho
 
 ## Here are the types of Tasks available:
@@ -150,7 +150,7 @@ _Elmacho exits_
     >`java -jar elmacho.jar`
 
     >A GUI similar to below should appear in a few seconds.
-  ![Welcome.png](/src/main/resources/images/Welcome.png)
+  ![Welcome.png](/docs/images/Welcome.png)
 5. Type the command in the command box and press `Send` to execute it.
 
 >**To view the github repository: click [here](https://github.com/chenxy12345/ip)**

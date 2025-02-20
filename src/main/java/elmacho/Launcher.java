@@ -1,8 +1,7 @@
 package elmacho;
 
-import ui.Main;
-
 import javafx.application.Application;
+import ui.Main;
 
 /**
  * A launcher class to workaround classpath issues.

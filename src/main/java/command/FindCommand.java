@@ -1,8 +1,6 @@
 package command;
 
-import exceptions.ElmachoException;
 import task.Tasklist;
-
 import ui.Ui;
 
 public class FindCommand extends Command {
