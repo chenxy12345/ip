@@ -108,6 +108,7 @@ public class Parser {
                 if (deadlineDetails.length < 2) {
                     throw new ElmachoException("HELLOOO! When is the deadline??");
                 }
+
                 String task = deadlineDetails[0].trim();
                 String dueDate = deadlineDetails[1].trim();  // This will be "2019-01-01 1800"
 
@@ -118,6 +119,7 @@ public class Parser {
                 if (eventDetails.length < 2) {
                     throw new ElmachoException("HELLOOO! When does your event start??");
                 }
+
                 String task = eventDetails[0].trim();
 
                 String[] timeDetails = eventDetails[1].split("/to ", 2);
@@ -134,7 +136,7 @@ public class Parser {
         return new Command();
     }
 
-    public static Command reloadTask(String command, String[] description) {
+    public static Command reloadTask(String command, String[] description) throws ElmachoException {
         String[] details = description[1].split("/");
         boolean isDone = details[0].equals("1");
         String storeDescription = details[1];

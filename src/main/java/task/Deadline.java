@@ -2,17 +2,23 @@ package task;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+
+import exceptions.ElmachoException;
 
 public class Deadline extends Task {
 
     protected LocalDateTime by;
 
-    public Deadline(String description, String by, boolean isDone) {
+    public Deadline(String description, String by, boolean isDone) throws ElmachoException {
         super(description, isDone);
         assert by != null : "Date should not be null";
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
-        LocalDateTime dueTime = LocalDateTime.parse(by, formatter);
-        this.by = dueTime;
+        try {
+            this.by = LocalDateTime.parse(by, formatter);
+        } catch (DateTimeParseException e) {
+            throw new ElmachoException("HELLOOO! Wrong date-time format! Use: yyyy-MM-dd HHmm");
+        }
     }
 
     public String getInfo() {

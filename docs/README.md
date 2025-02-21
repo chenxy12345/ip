@@ -134,6 +134,8 @@ _List of features and formats will appear_
 ### Exiting the program: `bye`
 Format: `bye`  
 _Elmacho exits_
+
+
 > [!CAUTION]
 > Only delete when you're sure you've finished the task!   
 > Archive if you may still go back to it.
